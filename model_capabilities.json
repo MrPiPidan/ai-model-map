@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "updated": "2026-05-05",
+  "version": 3,
+  "updated": "2026-05-13",
   "notes": "模型能力配置表，pattern 从上到下匹配，首个命中生效，最后一条 .* 兜底",
   "rules": [
 
@@ -45,10 +45,11 @@
       "context": { "max_input": 1000000, "max_output": 128000 },
       "efforts": ["low", "medium", "high", "xhigh", "max"],
       "thinking_config": {
-        "param": { "type": "adaptive" },
+        "param": { "type": "adaptive", "display": "summarized" },
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
         "response_field": "reasoning_content"
       }
     },
