@@ -1,12 +1,36 @@
 {
-  "version": 3,
-  "updated": "2026-05-13",
+  "version": 5,
+  "updated": "2026-06-18",
   "notes": "模型能力配置表，pattern 从上到下匹配，首个命中生效，最后一条 .* 兜底",
   "rules": [
 
     {
       "_comment": "======== Anthropic Claude ========",
       "_source": "https://platform.claude.com/docs/en/build-with-claude/effort"
+    },
+    {
+      "pattern": "claude-fable-5.*",
+      "name": "Claude Fable 5",
+      "provider": "anthropic",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high", "max"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": { "type": "adaptive" },
+        "effort_param_name": "effort",
+        "effort_location": "output_config",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content"
+      }
     },
     {
       "pattern": "claude-mythos.*",
@@ -27,6 +51,30 @@
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "claude-opus-4-8.*",
+      "name": "Claude Opus 4.8",
+      "provider": "anthropic",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": { "type": "adaptive", "display": "summarized" },
+        "effort_param_name": "effort",
+        "effort_location": "output_config",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
         "response_field": "reasoning_content"
       }
     },
