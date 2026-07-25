@@ -1,12 +1,65 @@
 {
-  "version": 5,
-  "updated": "2026-06-18",
+  "version": 6,
+  "updated": "2026-07-25",
   "notes": "模型能力配置表，pattern 从上到下匹配，首个命中生效，最后一条 .* 兜底",
   "rules": [
 
     {
       "_comment": "======== Anthropic Claude ========",
       "_source": "https://platform.claude.com/docs/en/build-with-claude/effort"
+    },
+    {
+      "pattern": "claude-opus-5.*",
+      "name": "Claude Opus 5",
+      "provider": "anthropic",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": { "type": "adaptive" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": "effort",
+        "effort_location": "output_config",
+        "thinking_required_efforts": ["xhigh", "max"],
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "claude-sonnet-5.*",
+      "name": "Claude Sonnet 5",
+      "provider": "anthropic",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": { "type": "adaptive" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": "effort",
+        "effort_location": "output_config",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
     },
     {
       "pattern": "claude-fable-5.*",
@@ -21,10 +74,10 @@
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "max"],
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
       "default_effort": "high",
       "thinking_config": {
-        "param": { "type": "adaptive" },
+        "param": null,
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": true,
@@ -34,7 +87,7 @@
     },
     {
       "pattern": "claude-mythos.*",
-      "name": "Claude Mythos Preview",
+      "name": "Claude Mythos 5 / Preview",
       "provider": "anthropic",
       "capabilities": {
         "thinking": true,
@@ -45,13 +98,16 @@
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "max"],
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "default_effort": "high",
       "thinking_config": {
-        "param": { "type": "adaptive" },
+        "param": null,
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": true,
-        "response_field": "reasoning_content"
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
       }
     },
     {
@@ -206,7 +262,31 @@
 
     {
       "_comment": "======== OpenAI ========",
-      "_source": "https://developers.openai.com/docs/guides/reasoning"
+      "_source": "https://developers.openai.com/api/docs/guides/latest-model"
+    },
+    {
+      "pattern": "gpt-5\\.6.*",
+      "name": "GPT-5.6",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1050000, "max_output": 128000 },
+      "efforts": ["none", "low", "medium", "high", "xhigh", "max"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "allow_sampling_when_effort_none": true,
+        "response_field": "reasoning_content"
+      }
     },
     {
       "pattern": "gpt-5\\.5.*",
@@ -220,8 +300,8 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 272000, "max_output": 128000 },
-      "efforts": ["none", "minimal", "low", "medium", "high", "xhigh"],
+      "context": { "max_input": 1050000, "max_output": 128000 },
+      "efforts": ["none", "low", "medium", "high", "xhigh"],
       "default_effort": "medium",
       "thinking_config": {
         "param": null,
@@ -367,7 +447,7 @@
 
     {
       "_comment": "======== 通义千问 Qwen ========",
-      "_source": "https://docs.qwencloud.com/developer-guides/text-generation/thinking"
+      "_source": "https://help.aliyun.com/en/model-studio/deep-thinking"
     },
     {
       "pattern": "qwq.*",
@@ -392,8 +472,32 @@
       }
     },
     {
-      "pattern": "qwen3\\.?5.*|qwen3\\.?6.*",
-      "name": "Qwen3.5/3.6 (默认开启思考)",
+      "pattern": "qwen3\\.8.*",
+      "name": "Qwen3.8 (始终思考)",
+      "provider": "qwen",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "enable_thinking": true },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "budget_param_name": "thinking_budget",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "qwen3\\.[567].*",
+      "name": "Qwen3.5/3.6/3.7 (默认开启思考)",
       "provider": "qwen",
       "capabilities": {
         "thinking": true,
@@ -403,11 +507,12 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 131072, "max_output": 32768 },
+      "context": { "max_input": 1000000, "max_output": 128000 },
       "efforts": [],
       "thinking_config": {
         "param": { "enable_thinking": true },
         "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
         "disallow_sampling_when_thinking": false,
@@ -416,7 +521,7 @@
       }
     },
     {
-      "pattern": "qwen3.*|qwen-plus.*|qwen-max.*|qwen-turbo.*",
+      "pattern": "qwen3(?!-vl|-omni).*|qwen-plus.*|qwen-max.*|qwen-turbo.*",
       "name": "Qwen3/Qwen商用系列",
       "provider": "qwen",
       "capabilities": {
@@ -432,6 +537,7 @@
       "thinking_config": {
         "param": { "enable_thinking": true },
         "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
         "disallow_sampling_when_thinking": false,
@@ -456,6 +562,7 @@
       "thinking_config": {
         "param": { "enable_thinking": true },
         "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
         "disallow_sampling_when_thinking": false,
@@ -480,6 +587,7 @@
       "thinking_config": {
         "param": { "enable_thinking": true },
         "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
         "disallow_sampling_when_thinking": false,
@@ -490,11 +598,109 @@
 
     {
       "_comment": "======== Kimi / 月之暗面 ========",
-      "_source": "https://platform.moonshot.ai/docs/guide/use-kimi-k2-thinking-model"
+      "_source": "https://platform.kimi.ai/docs/api/models-overview"
+    },
+    {
+      "pattern": "kimi-k3.*",
+      "name": "Kimi K3",
+      "provider": "kimi",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 131072 },
+      "efforts": ["low", "high", "max"],
+      "default_effort": "max",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      }
+    },
+    {
+      "pattern": "kimi-k2\\.7-code.*",
+      "name": "Kimi K2.7 Code",
+      "provider": "kimi",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 256000, "max_output": 131072 },
+      "efforts": [],
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      }
+    },
+    {
+      "pattern": "kimi-k2\\.6.*",
+      "name": "Kimi K2.6",
+      "provider": "kimi",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 256000, "max_output": 131072 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "kimi-k2\\.5.*",
+      "name": "Kimi K2.5",
+      "provider": "kimi",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 256000, "max_output": 131072 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
     },
     {
       "pattern": "kimi-k2-thinking.*",
-      "name": "Kimi K2 Thinking (始终思考)",
+      "name": "Kimi K2 Thinking（已停用）",
       "provider": "kimi",
       "capabilities": {
         "thinking": true,
@@ -509,31 +715,9 @@
       "thinking_config": {
         "param": null,
         "effort_param_name": null,
-        "disallow_sampling_when_thinking": false,
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
         "response_field": "reasoning_content"
-      }
-    },
-    {
-      "pattern": "kimi-k2\\.[56789].*|kimi-k3.*",
-      "name": "Kimi K2.5+ (可开关思考)",
-      "provider": "kimi",
-      "capabilities": {
-        "thinking": true,
-        "thinking_always_on": false,
-        "vision": false,
-        "audio": false,
-        "function_calling": true,
-        "structured_output": false
-      },
-      "context": { "max_input": 131072, "max_output": 32768 },
-      "efforts": [],
-      "thinking_config": {
-        "param": { "type": "enabled" },
-        "disable_param": { "type": "disabled" },
-        "effort_param_name": null,
-        "disallow_sampling_when_thinking": false,
-        "response_field": "reasoning_content",
-        "default_enabled": true
       }
     },
 
@@ -618,7 +802,33 @@
 
     {
       "_comment": "======== 腾讯混元 Hunyuan ========",
-      "_source": "https://cloud.tencent.com/document/product/1729/104753"
+      "_source": "https://cloud.tencent.com/document/product/1823/131208"
+    },
+    {
+      "pattern": "hy3(?:-preview)?",
+      "name": "腾讯混元 Hy3",
+      "provider": "hunyuan",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 192000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high"],
+      "default_effort": "low",
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": false,
+        "preserve_reasoning_content": true
+      }
     },
     {
       "pattern": "hunyuan.*think.*|hunyuan-t1.*",
@@ -754,10 +964,35 @@
 
     {
       "_comment": "======== MiniMax ========",
-      "_source": "https://platform.minimax.io/docs/api-reference/text-openai-api"
+      "_source": "https://platform.minimax.io/docs/api-reference/text-chat-openai"
     },
     {
-      "pattern": "[Mm]ini[Mm]ax-[Mm]2.*|abab7.*",
+      "pattern": "(?:minimax/)?minimax-m3.*",
+      "name": "MiniMax M3",
+      "provider": "minimax",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 524288 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "adaptive" },
+        "disable_param": { "type": "disabled" },
+        "request_params": { "reasoning_split": true },
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      }
+    },
+    {
+      "pattern": "(?:minimax/)?minimax-m2.*|abab7.*",
       "name": "MiniMax M2 系列",
       "provider": "minimax",
       "capabilities": {
@@ -780,7 +1015,31 @@
 
     {
       "_comment": "======== xAI Grok ========",
-      "_source": "https://docs.x.ai/docs/guides/reasoning"
+      "_source": "https://docs.x.ai/developers/model-capabilities/text/reasoning"
+    },
+    {
+      "pattern": "grok-4\\.5.*|grok-build-latest",
+      "name": "Grok 4.5",
+      "provider": "xai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 500000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
     },
     {
       "pattern": "grok-4.*",
@@ -852,8 +1111,30 @@
       }
     },
     {
-      "pattern": "mistral-small.*|mistral-medium.*",
-      "name": "Mistral Small/Medium (可调推理)",
+      "pattern": "mistral-medium.*",
+      "name": "Mistral Medium（多模态+可调推理）",
+      "provider": "mistral",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 131072, "max_output": 32768 },
+      "efforts": ["none", "high"],
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "mistral-small.*",
+      "name": "Mistral Small（可调推理）",
       "provider": "mistral",
       "capabilities": {
         "thinking": true,
@@ -876,7 +1157,57 @@
 
     {
       "_comment": "======== Google Gemini ========",
-      "_source": "https://ai.google.dev/gemini-api/docs/thinking"
+      "_source": "https://ai.google.dev/gemini-api/docs/openai"
+    },
+    {
+      "pattern": "gemini-3\\.6-flash.*",
+      "name": "Gemini 3.6 Flash",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 65536 },
+      "efforts": ["minimal", "low", "medium", "high"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "gemini-3\\.5-flash-lite.*",
+      "name": "Gemini 3.5 Flash-Lite",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 65536 },
+      "efforts": ["minimal", "low", "medium", "high"],
+      "default_effort": "minimal",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
     },
     {
       "pattern": "gemini-3.*",
@@ -884,21 +1215,22 @@
       "provider": "google",
       "capabilities": {
         "thinking": true,
-        "thinking_always_on": false,
+        "thinking_always_on": true,
         "vision": true,
         "audio": true,
         "function_calling": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": ["low", "medium", "high"],
+      "efforts": ["minimal", "low", "medium", "high"],
+      "default_effort": "high",
       "thinking_config": {
-        "param": { "include_thoughts": true },
-        "effort_param_name": "thinking_level",
-        "effort_location": "thinking_config",
-        "effort_map": { "low": "LOW", "medium": "MEDIUM", "high": "HIGH" },
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
         "disallow_sampling_when_thinking": false,
-        "response_field": "thinking"
+        "response_field": "reasoning_content",
+        "default_enabled": true
       }
     },
     {
@@ -914,13 +1246,15 @@
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": [],
+      "efforts": ["none", "minimal", "low", "medium", "high"],
+      "default_effort": "medium",
       "thinking_config": {
-        "param": { "include_thoughts": true },
-        "effort_param_name": null,
-        "budget_param_name": "thinking_budget",
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
         "disallow_sampling_when_thinking": false,
-        "response_field": "thinking"
+        "allow_sampling_when_effort_none": true,
+        "response_field": "reasoning_content"
       }
     },
 
