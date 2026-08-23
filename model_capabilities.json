@@ -1,6 +1,6 @@
 {
-  "version": 6,
-  "updated": "2026-07-25",
+  "version": 13,
+  "updated": "2026-08-23",
   "notes": "模型能力配置表，pattern 从上到下匹配，首个命中生效，最后一条 .* 兜底",
   "rules": [
 
@@ -18,6 +18,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 128000 },
@@ -45,6 +46,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 128000 },
@@ -71,6 +73,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 128000 },
@@ -95,6 +98,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 128000 },
@@ -120,6 +124,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 128000 },
@@ -144,10 +149,12 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 128000 },
       "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "default_effort": "high",
       "thinking_config": {
         "param": { "type": "adaptive", "display": "summarized" },
         "effort_param_name": "effort",
@@ -167,10 +174,12 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 128000 },
       "efforts": ["low", "medium", "high", "max"],
+      "default_effort": "high",
       "thinking_config": {
         "param": { "type": "adaptive" },
         "effort_param_name": "effort",
@@ -189,10 +198,12 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 64000 },
       "efforts": ["low", "medium", "high", "max"],
+      "default_effort": "high",
       "thinking_config": {
         "param": { "type": "adaptive" },
         "effort_param_name": "effort",
@@ -202,8 +213,8 @@
       }
     },
     {
-      "pattern": "claude-opus-4-5.*|claude-haiku-4-5.*",
-      "name": "Claude Opus/Haiku 4.5",
+      "pattern": "claude-opus-4-5.*",
+      "name": "Claude Opus 4.5",
       "provider": "anthropic",
       "capabilities": {
         "thinking": true,
@@ -211,14 +222,60 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 200000, "max_output": 64000 },
-      "efforts": ["low", "medium", "high", "max"],
+      "efforts": ["low", "medium", "high"],
+      "default_effort": "high",
       "thinking_config": {
         "param": { "type": "enabled", "budget_tokens": 16384 },
         "effort_param_name": "effort",
         "effort_location": "output_config",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "claude-sonnet-4-5.*",
+      "name": "Claude Sonnet 4.5",
+      "provider": "anthropic",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 200000, "max_output": 64000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "enabled", "budget_tokens": 16384 },
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "claude-haiku-4-5.*",
+      "name": "Claude Haiku 4.5",
+      "provider": "anthropic",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 200000, "max_output": 64000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "enabled", "budget_tokens": 16384 },
+        "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content"
       }
@@ -233,6 +290,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 200000, "max_output": 8192 },
@@ -274,6 +332,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1050000, "max_output": 128000 },
@@ -289,6 +348,30 @@
       }
     },
     {
+      "pattern": "gpt-5\\.5-pro.*",
+      "name": "GPT-5.5 Pro",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 1050000, "max_output": 128000 },
+      "efforts": ["medium", "high", "xhigh"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
       "pattern": "gpt-5\\.5.*",
       "name": "GPT-5.5",
       "provider": "openai",
@@ -298,6 +381,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1050000, "max_output": 128000 },
@@ -313,8 +397,32 @@
       }
     },
     {
-      "pattern": "gpt-5\\.4.*|gpt-5\\.3.*|gpt-5\\.2.*|gpt-5\\.1.*",
-      "name": "GPT-5.x",
+      "pattern": "gpt-5\\.4-pro.*",
+      "name": "GPT-5.4 Pro",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 1050000, "max_output": 128000 },
+      "efforts": ["medium", "high", "xhigh"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "gpt-5\\.4-(?:mini|nano).*",
+      "name": "GPT-5.4 Mini/Nano",
       "provider": "openai",
       "capabilities": {
         "thinking": true,
@@ -322,16 +430,261 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 272000, "max_output": 128000 },
+      "context": { "max_input": 400000, "max_output": 128000 },
       "efforts": ["none", "low", "medium", "high", "xhigh"],
+      "default_effort": "none",
       "thinking_config": {
         "param": null,
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
         "disallow_sampling_when_thinking": true,
         "allow_sampling_when_effort_none": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "gpt-5\\.4.*",
+      "name": "GPT-5.4",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1050000, "max_output": 128000 },
+      "efforts": ["none", "low", "medium", "high", "xhigh"],
+      "default_effort": "none",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "allow_sampling_when_effort_none": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "gpt-5\\.3-chat-latest",
+      "name": "GPT-5.3 Chat",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 128000, "max_output": 16384 },
+      "efforts": [],
+      "thinking_config": null
+    },
+    {
+      "pattern": "gpt-5\\.3-codex.*",
+      "name": "GPT-5.3 Codex",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 400000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high", "xhigh"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "gpt-5\\.2-chat-latest",
+      "name": "GPT-5.2 Chat",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 128000, "max_output": 16384 },
+      "efforts": [],
+      "thinking_config": null
+    },
+    {
+      "pattern": "gpt-5\\.2-pro.*",
+      "name": "GPT-5.2 Pro",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 400000, "max_output": 128000 },
+      "efforts": ["medium", "high", "xhigh"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "gpt-5\\.2-codex.*",
+      "name": "GPT-5.2 Codex",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 400000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high", "xhigh"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "gpt-5\\.2.*",
+      "name": "GPT-5.2",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 400000, "max_output": 128000 },
+      "efforts": ["none", "low", "medium", "high", "xhigh"],
+      "default_effort": "none",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "allow_sampling_when_effort_none": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "gpt-5\\.1-chat-latest",
+      "name": "GPT-5.1 Chat",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 128000, "max_output": 16384 },
+      "efforts": [],
+      "thinking_config": null
+    },
+    {
+      "pattern": "gpt-5\\.1-codex.*",
+      "name": "GPT-5.1 Codex",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 400000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "gpt-5\\.1.*",
+      "name": "GPT-5.1",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 400000, "max_output": 128000 },
+      "efforts": ["none", "low", "medium", "high"],
+      "default_effort": "none",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "allow_sampling_when_effort_none": true,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "gpt-5-pro.*",
+      "name": "GPT-5 Pro",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 400000, "max_output": 272000 },
+      "efforts": ["high"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
         "response_field": "reasoning_content"
       }
     },
@@ -341,25 +694,26 @@
       "provider": "openai",
       "capabilities": {
         "thinking": true,
-        "thinking_always_on": false,
+        "thinking_always_on": true,
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 272000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh"],
+      "context": { "max_input": 400000, "max_output": 128000 },
+      "efforts": ["minimal", "low", "medium", "high"],
+      "default_effort": "medium",
       "thinking_config": {
         "param": null,
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
         "disallow_sampling_when_thinking": true,
-        "allow_sampling_when_effort_none": true,
         "response_field": "reasoning_content"
       }
     },
     {
-      "pattern": "o[1234]-.*|o3-.*",
+      "pattern": "o[1-4](?:-.*)?",
       "name": "OpenAI o-系列",
       "provider": "openai",
       "capabilities": {
@@ -368,10 +722,12 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 200000, "max_output": 100000 },
       "efforts": ["low", "medium", "high"],
+      "default_effort": "medium",
       "thinking_config": {
         "param": null,
         "effort_param_name": "reasoning_effort",
@@ -389,6 +745,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 128000, "max_output": 32768 },
@@ -398,10 +755,10 @@
 
     {
       "_comment": "======== DeepSeek ========",
-      "_source": "https://api-docs.deepseek.com/guides/thinking_mode"
+      "_source": "https://api-docs.deepseek.com/quick_start/pricing"
     },
     {
-      "pattern": "deepseek-r1.*|deepseek-reasoner.*",
+      "pattern": "deepseek-r1.*",
       "name": "DeepSeek R1",
       "provider": "deepseek",
       "capabilities": {
@@ -422,8 +779,35 @@
       }
     },
     {
-      "pattern": "deepseek-chat|deepseek-v[34].*",
-      "name": "DeepSeek V3/V4",
+      "pattern": "deepseek-v4-flash-vision-exp.*",
+      "name": "DeepSeek V4 Flash Vision Exp",
+      "provider": "deepseek",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 384000 },
+      "efforts": ["low", "high", "max"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      }
+    },
+    {
+      "pattern": "deepseek-v4-(?:flash|pro).*|deepseek-chat|deepseek-reasoner",
+      "name": "DeepSeek V4 / 兼容别名",
       "provider": "deepseek",
       "capabilities": {
         "thinking": true,
@@ -431,15 +815,42 @@
         "vision": false,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 64000, "max_output": 8192 },
+      "context": { "max_input": 1000000, "max_output": 384000 },
       "efforts": ["high", "max"],
+      "default_effort": "high",
       "thinking_config": {
         "param": { "type": "enabled" },
         "disable_param": { "type": "disabled" },
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      }
+    },
+    {
+      "pattern": "deepseek-v3.*",
+      "name": "DeepSeek V3",
+      "provider": "deepseek",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": { "max_input": 64000, "max_output": 8192 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": null,
         "disallow_sampling_when_thinking": true,
         "response_field": "reasoning_content"
       }
@@ -472,21 +883,23 @@
       }
     },
     {
-      "pattern": "qwen3\\.8.*",
-      "name": "Qwen3.8 (始终思考)",
+      "pattern": "qwen3\\.8-(?:max|plus|flash).*",
+      "name": "Qwen3.8 商用系列（原生视觉+联网）",
       "provider": "qwen",
       "capabilities": {
         "thinking": true,
-        "thinking_always_on": true,
-        "vision": false,
+        "thinking_always_on": false,
+        "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
+      "context": { "max_input": 1000000, "max_output": 131072 },
       "efforts": [],
       "thinking_config": {
         "param": { "enable_thinking": true },
+        "disable_param": { "enable_thinking": false },
         "param_location": "top_level",
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
@@ -496,8 +909,190 @@
       }
     },
     {
-      "pattern": "qwen3\\.[567].*",
-      "name": "Qwen3.5/3.6/3.7 (默认开启思考)",
+      "pattern": "qwen3\\.8.*",
+      "name": "Qwen3.8（原生视觉+默认思考）",
+      "provider": "qwen",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 131072 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "enable_thinking": true },
+        "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "budget_param_name": "thinking_budget",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "qwen3\\.6-max-preview.*",
+      "name": "Qwen3.6 Max Preview",
+      "provider": "qwen",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 262144, "max_output": 65536 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "enable_thinking": true },
+        "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "budget_param_name": "thinking_budget",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "qwen3\\.5-omni-plus.*",
+      "name": "Qwen3.5 Omni Plus",
+      "provider": "qwen",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": false
+      },
+      "context": { "max_input": 64000, "max_output": 32768 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "enable_thinking": true },
+        "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "budget_param_name": "thinking_budget",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "qwen3\\.[567]-(?:max|plus|flash).*",
+      "name": "Qwen3.5/3.6/3.7 商用系列（原生视觉+联网）",
+      "provider": "qwen",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 65536 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "enable_thinking": true },
+        "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "budget_param_name": "thinking_budget",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "qwen3\\.7.*",
+      "name": "Qwen3.7（原生视觉+默认思考）",
+      "provider": "qwen",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 65536 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "enable_thinking": true },
+        "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "budget_param_name": "thinking_budget",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "qwen3\\.6.*",
+      "name": "Qwen3.6（原生视觉+默认思考）",
+      "provider": "qwen",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": { "max_input": 262144, "max_output": 65536 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "enable_thinking": true },
+        "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "budget_param_name": "thinking_budget",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "qwen3\\.5.*",
+      "name": "Qwen3.5（原生视觉+默认思考）",
+      "provider": "qwen",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": { "max_input": 32768, "max_output": 8192 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "enable_thinking": true },
+        "disable_param": { "enable_thinking": false },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "budget_param_name": "thinking_budget",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "qwen3-max.*",
+      "name": "Qwen3 Max（Responses 联网）",
       "provider": "qwen",
       "capabilities": {
         "thinking": true,
@@ -505,9 +1100,10 @@
         "vision": false,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
+      "context": { "max_input": 262144, "max_output": 32768 },
       "efforts": [],
       "thinking_config": {
         "param": { "enable_thinking": true },
@@ -555,7 +1151,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
-        "structured_output": false
+        "structured_output": true
       },
       "context": { "max_input": 131072, "max_output": 32768 },
       "efforts": [],
@@ -633,7 +1229,7 @@
       "capabilities": {
         "thinking": true,
         "thinking_always_on": true,
-        "vision": true,
+        "vision": false,
         "audio": false,
         "function_calling": true,
         "structured_output": false
@@ -710,7 +1306,7 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 131072, "max_output": 32768 },
+      "context": { "max_input": 256000, "max_output": 131072 },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -723,21 +1319,21 @@
 
     {
       "_comment": "======== 智谱 GLM ========",
-      "_source": "https://docs.z.ai/guides/capabilities/thinking"
+      "_source": "https://docs.z.ai/guides/overview/overview"
     },
     {
-      "pattern": "glm-5.*|glm-4\\.[5-9].*",
-      "name": "GLM-4.5/4.6/4.7/5.x",
+      "pattern": "glm-5v.*",
+      "name": "GLM-5V",
       "provider": "zhipu",
       "capabilities": {
         "thinking": true,
         "thinking_always_on": false,
-        "vision": false,
+        "vision": true,
         "audio": false,
         "function_calling": true,
-        "structured_output": true
+        "structured_output": false
       },
-      "context": { "max_input": 128000, "max_output": 16384 },
+      "context": { "max_input": 200000, "max_output": 128000 },
       "efforts": [],
       "thinking_config": {
         "param": { "type": "enabled" },
@@ -749,8 +1345,8 @@
       }
     },
     {
-      "pattern": "glm-5v.*|glm-4\\.5v.*",
-      "name": "GLM 视觉系列",
+      "pattern": "glm-4\\.6v.*",
+      "name": "GLM-4.6V",
       "provider": "zhipu",
       "capabilities": {
         "thinking": true,
@@ -760,7 +1356,128 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 128000, "max_output": 16384 },
+      "context": { "max_input": 128000, "max_output": 32000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "glm-4\\.5v.*",
+      "name": "GLM-4.5V",
+      "provider": "zhipu",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 64000, "max_output": 16000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "glm-5\\.3.*",
+      "name": "GLM-5.3",
+      "provider": "zhipu",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": ["low", "high", "max"],
+      "default_effort": "max",
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      }
+    },
+    {
+      "pattern": "glm-5\\.2.*",
+      "name": "GLM-5.2",
+      "provider": "zhipu",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": ["high", "max"],
+      "default_effort": "max",
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      }
+    },
+    {
+      "pattern": "glm-5(?:\\.1.*|-turbo.*|$)|glm-4\\.[67].*",
+      "name": "GLM-4.6/4.7/5/5.1",
+      "provider": "zhipu",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 200000, "max_output": 128000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      }
+    },
+    {
+      "pattern": "glm-4\\.5(?!v).*",
+      "name": "GLM-4.5",
+      "provider": "zhipu",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 128000, "max_output": 96000 },
       "efforts": [],
       "thinking_config": {
         "param": { "type": "enabled" },
@@ -774,19 +1491,20 @@
 
     {
       "_comment": "======== 豆包 Doubao ========",
-      "_source": "https://doc.dmxapi.com/thinking-doubao.html"
+      "_source": "https://www.volcengine.com/docs/82379/66619f8df281250274ef4f88"
     },
     {
       "pattern": "doubao-seed.*|doubao-2.*|doubao.*thinking.*",
-      "name": "豆包 Seed/2.0 系列",
+      "name": "豆包 Seed 2.0/2.1 系列",
       "provider": "doubao",
       "capabilities": {
         "thinking": true,
         "thinking_always_on": false,
-        "vision": false,
+        "vision": true,
         "audio": false,
         "function_calling": true,
-        "structured_output": false
+        "native_web_search": true,
+        "structured_output": true
       },
       "context": { "max_input": 128000, "max_output": 16384 },
       "efforts": [],
@@ -814,14 +1532,14 @@
         "vision": false,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 192000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high"],
+      "context": { "max_input": 262144, "max_output": 128000 },
+      "efforts": ["low", "high"],
       "default_effort": "low",
       "thinking_config": {
-        "param": { "type": "enabled" },
-        "disable_param": { "type": "disabled" },
+        "param": null,
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
         "disallow_sampling_when_thinking": false,
@@ -872,12 +1590,12 @@
       "_source": "https://platform.stepfun.com/docs/zh/guides/developer/reasoning"
     },
     {
-      "pattern": "step-3\\.5.*|step-3$|step-3-.*|step-r1.*",
-      "name": "阶跃星辰推理系列",
+      "pattern": "step-3\\.5-flash-2603.*",
+      "name": "Step 3.5 Flash 2603",
       "provider": "stepfun",
       "capabilities": {
         "thinking": true,
-        "thinking_always_on": false,
+        "thinking_always_on": true,
         "vision": false,
         "audio": false,
         "function_calling": true,
@@ -885,18 +1603,140 @@
       },
       "context": { "max_input": 256000, "max_output": 32768 },
       "efforts": ["low", "high"],
+      "default_effort": "high",
       "thinking_config": {
-        "param": null,
+        "param": { "reasoning_format": "deepseek-style" },
+        "param_location": "top_level",
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
         "disallow_sampling_when_thinking": false,
-        "response_field": "reasoning_content"
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "step-3\\.5.*",
+      "name": "Step 3.5 Flash",
+      "provider": "stepfun",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 256000, "max_output": 32768 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "reasoning_format": "deepseek-style" },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "step-3(?:$|-.*)",
+      "name": "Step 3（多模态推理）",
+      "provider": "stepfun",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 64000, "max_output": 32768 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "reasoning_format": "deepseek-style" },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "step-r1.*",
+      "name": "Step R1-V（多模态推理）",
+      "provider": "stepfun",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 100000, "max_output": 32768 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "reasoning_format": "deepseek-style" },
+        "param_location": "top_level",
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
       }
     },
 
     {
       "_comment": "======== 小米 MiMo ========",
-      "_source": "https://www.mimo-v2.com/zh/models"
+      "_source": "https://mimo.mi.com/docs/en-US/quick-start/model"
+    },
+    {
+      "pattern": "mimo-v2\\.5-pro",
+      "name": "MiMo V2.5 Pro",
+      "provider": "mimo",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      }
+    },
+    {
+      "pattern": "mimo-v2\\.5",
+      "name": "MiMo V2.5（全模态）",
+      "provider": "mimo",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": { "type": "enabled" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      }
     },
     {
       "pattern": "mimo.*omni.*|MiMo.*Omni.*",
@@ -1018,7 +1858,146 @@
       "_source": "https://docs.x.ai/developers/model-capabilities/text/reasoning"
     },
     {
-      "pattern": "grok-4\\.5.*|grok-build-latest",
+      "pattern": "grok-420-reasoning.*",
+      "name": "Grok 420 Reasoning（旧版）",
+      "provider": "xai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": false
+      },
+      "context": { "max_input": 256000, "max_output": 32768 },
+      "efforts": [],
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "grok-4(?:\\.|-)20.*multi-agent.*",
+      "name": "Grok 4.20 Multi-Agent",
+      "provider": "xai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high", "xhigh"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "grok-4(?:\\.|-)20.*non-reasoning.*",
+      "name": "Grok 4.20 Non-Reasoning",
+      "provider": "xai",
+      "capabilities": {
+        "thinking": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": [],
+      "thinking_config": null
+    },
+    {
+      "pattern": "grok-4(?:\\.|-)20.*",
+      "name": "Grok 4.20 Reasoning",
+      "provider": "xai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "grok-4\\.3.*|grok-latest",
+      "name": "Grok 4.3",
+      "provider": "xai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": ["none", "low", "medium", "high"],
+      "default_effort": "none",
+      "thinking_config": {
+        "param": null,
+        "disable_param": { "reasoning_effort": "none" },
+        "param_location": "top_level",
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "allow_sampling_when_effort_none": true,
+        "response_field": "reasoning_content",
+        "default_enabled": false
+      }
+    },
+    {
+      "pattern": "grok-4\\.6.*",
+      "name": "Grok 4.6",
+      "provider": "xai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 500000, "max_output": 128000 },
+      "efforts": ["low", "medium", "high", "xhigh"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "grok-4\\.5.*",
       "name": "Grok 4.5",
       "provider": "xai",
       "capabilities": {
@@ -1027,6 +2006,7 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 500000, "max_output": 128000 },
@@ -1036,6 +2016,68 @@
         "param": null,
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "grok-build-0\\.1.*|grok-code-fast.*|grok-build-latest",
+      "name": "Grok Build 0.1",
+      "provider": "xai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 256000, "max_output": 128000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "grok-4(?:-1)?-fast-non-reasoning.*",
+      "name": "Grok 4 Fast Non-Reasoning（兼容别名）",
+      "provider": "xai",
+      "capabilities": {
+        "thinking": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": [],
+      "thinking_config": null
+    },
+    {
+      "pattern": "grok-4(?:-1)?-fast-reasoning.*|grok-4-0709.*",
+      "name": "Grok 4 Fast Reasoning（兼容别名）",
+      "provider": "xai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000 },
+      "efforts": [],
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": null,
         "disallow_sampling_when_thinking": true,
         "response_field": "reasoning_content",
         "default_enabled": true
@@ -1076,6 +2118,7 @@
       },
       "context": { "max_input": 131072, "max_output": 32768 },
       "efforts": ["low", "high"],
+      "default_effort": "low",
       "thinking_config": {
         "param": null,
         "effort_param_name": "reasoning_effort",
@@ -1087,7 +2130,7 @@
 
     {
       "_comment": "======== Mistral ========",
-      "_source": "https://docs.mistral.ai/studio-api/conversations/reasoning"
+      "_source": "https://docs.mistral.ai/studio/conversations/reasoning"
     },
     {
       "pattern": "magistral.*",
@@ -1111,8 +2154,8 @@
       }
     },
     {
-      "pattern": "mistral-medium.*",
-      "name": "Mistral Medium（多模态+可调推理）",
+      "pattern": "mistral-medium-3-5.*|mistral-medium-latest",
+      "name": "Mistral Medium 3.5（多模态+可调推理）",
       "provider": "mistral",
       "capabilities": {
         "thinking": true,
@@ -1122,8 +2165,47 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 131072, "max_output": 32768 },
+      "context": { "max_input": 256000, "max_output": 64000 },
       "efforts": ["none", "high"],
+      "default_effort": "none",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content"
+      }
+    },
+    {
+      "pattern": "mistral-medium.*",
+      "name": "Mistral Medium 旧版",
+      "provider": "mistral",
+      "capabilities": {
+        "thinking": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 128000, "max_output": 32768 },
+      "efforts": [],
+      "thinking_config": null
+    },
+    {
+      "pattern": "mistral-small-(?:2603|latest).*",
+      "name": "Mistral Small 4（多模态+可调推理）",
+      "provider": "mistral",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 256000, "max_output": 64000 },
+      "efforts": ["none", "high"],
+      "default_effort": "none",
       "thinking_config": {
         "param": null,
         "effort_param_name": "reasoning_effort",
@@ -1134,30 +2216,49 @@
     },
     {
       "pattern": "mistral-small.*",
-      "name": "Mistral Small（可调推理）",
+      "name": "Mistral Small 旧版",
       "provider": "mistral",
       "capabilities": {
-        "thinking": true,
-        "thinking_always_on": false,
+        "thinking": false,
         "vision": false,
         "audio": false,
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 131072, "max_output": 32768 },
-      "efforts": ["none", "high"],
-      "thinking_config": {
-        "param": null,
-        "effort_param_name": "reasoning_effort",
-        "effort_location": "top_level",
-        "disallow_sampling_when_thinking": false,
-        "response_field": "reasoning_content"
-      }
+      "context": { "max_input": 128000, "max_output": 32768 },
+      "efforts": [],
+      "thinking_config": null
     },
 
     {
       "_comment": "======== Google Gemini ========",
       "_source": "https://ai.google.dev/gemini-api/docs/openai"
+    },
+    {
+      "pattern": "gemini-3\\.7-flash.*",
+      "name": "Gemini 3.7 Flash",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1048576, "max_output": 65536 },
+      "efforts": ["low", "medium", "high"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
     },
     {
       "pattern": "gemini-3\\.6-flash.*",
@@ -1169,6 +2270,33 @@
         "vision": true,
         "audio": true,
         "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 65536 },
+      "efforts": ["minimal", "low", "medium", "high"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "gemini-3\\.5-flash(?!-lite).*",
+      "name": "Gemini 3.5 Flash",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 65536 },
@@ -1194,6 +2322,7 @@
         "vision": true,
         "audio": true,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 65536 },
@@ -1210,6 +2339,56 @@
       }
     },
     {
+      "pattern": "gemini-3\\.1-pro.*",
+      "name": "Gemini 3.1 Pro",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 65536 },
+      "efforts": ["low", "medium", "high"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "gemini-3\\.1-flash-lite.*",
+      "name": "Gemini 3.1 Flash-Lite",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 65536 },
+      "efforts": ["minimal", "low", "medium", "high"],
+      "default_effort": "minimal",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
       "pattern": "gemini-3.*",
       "name": "Gemini 3.x",
       "provider": "google",
@@ -1219,6 +2398,7 @@
         "vision": true,
         "audio": true,
         "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 65536 },
@@ -1234,8 +2414,33 @@
       }
     },
     {
-      "pattern": "gemini-2\\.5.*",
-      "name": "Gemini 2.5",
+      "pattern": "gemini-2\\.5-pro.*",
+      "name": "Gemini 2.5 Pro",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 65536 },
+      "efforts": ["low", "medium", "high"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      }
+    },
+    {
+      "pattern": "gemini-2\\.5-flash-lite.*",
+      "name": "Gemini 2.5 Flash-Lite",
       "provider": "google",
       "capabilities": {
         "thinking": true,
@@ -1243,6 +2448,35 @@
         "vision": true,
         "audio": true,
         "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 65536 },
+      "efforts": ["none", "minimal", "low", "medium", "high"],
+      "default_effort": "none",
+      "thinking_config": {
+        "param": null,
+        "disable_param": { "reasoning_effort": "none" },
+        "param_location": "top_level",
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "allow_sampling_when_effort_none": true,
+        "response_field": "reasoning_content",
+        "default_enabled": false
+      }
+    },
+    {
+      "pattern": "gemini-2\\.5-flash.*",
+      "name": "Gemini 2.5 Flash",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": true,
         "structured_output": true
       },
       "context": { "max_input": 1000000, "max_output": 65536 },
@@ -1250,11 +2484,14 @@
       "default_effort": "medium",
       "thinking_config": {
         "param": null,
+        "disable_param": { "reasoning_effort": "none" },
+        "param_location": "top_level",
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
         "disallow_sampling_when_thinking": false,
         "allow_sampling_when_effort_none": true,
-        "response_field": "reasoning_content"
+        "response_field": "reasoning_content",
+        "default_enabled": true
       }
     },
 
