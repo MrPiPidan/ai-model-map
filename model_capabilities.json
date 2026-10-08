@@ -1,6 +1,6 @@
 {
-  "version": 24,
-  "updated": "2026-09-23",
+  "version": 25,
+  "updated": "2026-10-09",
   "notes": "模型能力配置表，pattern 从上到下匹配，首个命中生效，最后一条 .* 兜底",
   "rules": [
 
@@ -63,6 +63,36 @@
         "response_field": "reasoning_content",
         "default_enabled": true
       }
+    },
+    {
+      "pattern": "claude-sonnet-5[-.]5(?:-.*)?",
+      "name": "Claude Sonnet 5.5",
+      "provider": "anthropic",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000, "max_context": 1000000 },
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": { "type": "adaptive", "display": "summarized" },
+        "disable_param": { "type": "between_tools" },
+        "effort_param_name": "effort",
+        "effort_location": "output_config",
+        "thinking_required_efforts": ["xhigh", "max"],
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      },
+      "_source": "https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide",
+      "_comment": "Messages 关闭表示关闭回答前思考，发送纯 between_tools，不附 display/budget_tokens/effort；工具间仍可能返回 thinking。开启用 adaptive + effort；xhigh/max 必须开启。Chat/Responses 关闭仍发送 none，由中转映射，不能据此保证中转兼容。"
     },
     {
       "pattern": "claude-sonnet-5.*",
@@ -384,6 +414,36 @@
       }
     },
     {
+      "pattern": "claude-haiku-5[-.]5(?:-.*)?",
+      "name": "Claude Haiku 5.5",
+      "provider": "anthropic",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 1000000, "max_output": 128000, "max_context": 1000000 },
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": { "type": "adaptive", "display": "summarized" },
+        "disable_param": { "type": "disabled" },
+        "effort_param_name": "effort",
+        "effort_location": "output_config",
+        "thinking_required_efforts": ["xhigh", "max"],
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      },
+      "_source": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+      "_comment": "默认 medium，支持 adaptive/disabled；xhigh/max 需 adaptive。省略采样参数，避免 temperature/top_p 值及同时传入限制。128K 为普通 Messages 输出上限。"
+    },
+    {
       "pattern": "claude-haiku-4[-.]5.*",
       "name": "Claude Haiku 4.5",
       "provider": "anthropic",
@@ -477,6 +537,60 @@
         "default_enabled": true,
         "disallow_sampling_always": true
       }
+    },
+    {
+      "pattern": "gpt-6[.]1-sol(?:-.*)?",
+      "name": "GPT-6.1 Sol",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 922000, "max_output": 128000, "max_context": 1050000 },
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "default_effort": "medium",
+      "response_features": {
+        "request_reasoning_summary": true,
+        "request_encrypted_reasoning": true,
+        "request_web_search_sources": true
+      },
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      },
+      "_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "_comment": "默认 medium，始终思考，不接受 none/minimal。官方工具调用须使用 Responses；Chat 仅支持无工具调用。"
+    },
+    {
+      "pattern": "chat-latest",
+      "name": "Chat Latest",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": { "max_input": 272000, "max_output": 128000, "max_context": 400000 },
+      "efforts": [],
+      "response_features": {
+        "request_web_search_sources": true
+      },
+      "thinking_config": null,
+      "_source": "https://developers.openai.com/api/docs/models/chat-latest",
+      "_comment": "ChatGPT Instant 的动态快照，支持 Chat/Responses。官方未声明可调 reasoning effort，不发送思考参数。"
     },
     {
       "pattern": "gpt-6-sol(?:-.*)?",
@@ -2987,6 +3101,43 @@
       "_source": "https://platform.minimax.io/docs/api-reference/text-chat-openai"
     },
     {
+      "pattern": "(?:minimax/)?minimax-m3[.]1-flash-preview(?:-.*)?",
+      "name": "MiniMax M3.1 Flash Preview",
+      "provider": "minimax",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": false,
+        "native_web_search": false
+      },
+      "context": { "max_input": 1000000, "max_output": 524288, "max_context": 1000000 },
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "default_effort": "max",
+      "thinking_config": {
+        "request_extensions": [
+          {
+            "formats": ["chat", "anthropic"],
+            "param": { "type": "adaptive" }
+          },
+          {
+            "formats": ["chat"],
+            "request_params": { "reasoning_split": true }
+          }
+        ],
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      },
+      "_source": "https://platform.minimax.io/docs/api-reference/text-chat-openai",
+      "_comment": "当前仅 M Plan / MiniMax Code 可用。始终思考，默认 max；disabled/none 返回 400。Chat 用 reasoning_effort，Responses 用 reasoning.effort，Messages 用 output_config.effort。reasoning_split 仅 Chat 使用。1M 共享窗口保守按 1000000 预算。"
+    },
+    {
       "pattern": "(?:minimax/)?minimax-m3.*",
       "name": "MiniMax M3",
       "provider": "minimax",
@@ -3545,7 +3696,7 @@
       "_source": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
     },
     {
-      "pattern": "gemini-3\\.8-flash(?!-live(?:-|$)).*",
+      "pattern": "gemini-3\\.8-flash(?!.*-(?:live|tts|image)(?:[-:]|$)).*",
       "name": "Gemini 3.8 Flash",
       "provider": "google",
       "capabilities": {
@@ -3725,7 +3876,7 @@
       }
     },
     {
-      "pattern": "gemini-3(?!.*-live(?:-|$)).*",
+      "pattern": "gemini-3(?!.*-(?:live|tts|image)(?:[-:]|$)).*",
       "name": "Gemini 3.x",
       "provider": "google",
       "capabilities": {
