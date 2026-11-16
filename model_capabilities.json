@@ -1,9 +1,8 @@
 {
-  "version": 25,
-  "updated": "2026-10-09",
+  "version": 28,
+  "updated": "2026-11-16",
   "notes": "模型能力配置表，pattern 从上到下匹配，首个命中生效，最后一条 .* 兜底",
   "rules": [
-
     {
       "_comment": "======== Anthropic Claude ========",
       "_source": "https://platform.claude.com/docs/en/build-with-claude/effort"
@@ -21,11 +20,24 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000, "max_context": 1000000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "medium",
       "thinking_config": {
-        "param": { "type": "adaptive", "display": "summarized" },
+        "param": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": true,
@@ -49,15 +61,31 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
-        "param": { "type": "adaptive" },
-        "disable_param": { "type": "disabled" },
+        "param": {
+          "type": "adaptive"
+        },
+        "disable_param": {
+          "type": "disabled"
+        },
         "effort_param_name": "effort",
         "effort_location": "output_config",
-        "thinking_required_efforts": ["xhigh", "max"],
+        "thinking_required_efforts": [
+          "xhigh",
+          "max"
+        ],
         "disallow_sampling_when_thinking": true,
         "disallow_sampling_always": true,
         "response_field": "reasoning_content",
@@ -77,15 +105,33 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000, "max_context": 1000000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
-        "param": { "type": "adaptive", "display": "summarized" },
-        "disable_param": { "type": "between_tools" },
+        "param": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "disable_param": {
+          "type": "between_tools"
+        },
         "effort_param_name": "effort",
         "effort_location": "output_config",
-        "thinking_required_efforts": ["xhigh", "max"],
+        "thinking_required_efforts": [
+          "xhigh",
+          "max"
+        ],
         "disallow_sampling_when_thinking": true,
         "disallow_sampling_always": true,
         "response_field": "reasoning_content",
@@ -107,12 +153,25 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
-        "param": { "type": "adaptive" },
-        "disable_param": { "type": "disabled" },
+        "param": {
+          "type": "adaptive"
+        },
+        "disable_param": {
+          "type": "disabled"
+        },
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": true,
@@ -120,6 +179,47 @@
         "response_field": "reasoning_content",
         "default_enabled": true
       }
+    },
+    {
+      "pattern": "claude-fable-5[-.]2(?:-.*)?",
+      "name": "Claude Fable 5.2",
+      "provider": "anthropic",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "effort_param_name": "effort",
+        "effort_location": "output_config",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      },
+      "_source": "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+      "_comment": "2026-11-09 发布；始终 adaptive，五档强度，默认 high，禁止采样与强制工具选择。Messages 会严格校验历史思考块的前缀；编辑 system/tools/历史或压缩上下文后的续传需另行验证，能力表不解决前缀绑定。"
     },
     {
       "pattern": "claude-fable-5[-.]1.*",
@@ -134,8 +234,17 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "param": {
@@ -164,8 +273,17 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "param": {
@@ -181,6 +299,47 @@
       }
     },
     {
+      "pattern": "claude-mythos-5[-.]2(?:-.*)?",
+      "name": "Claude Mythos 5.2",
+      "provider": "anthropic",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "effort_param_name": "effort",
+        "effort_location": "output_config",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      },
+      "_source": "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+      "_comment": "2026-11-09 发布；始终 adaptive，五档强度，默认 high，禁止采样与强制工具选择。Messages 会严格校验历史思考块的前缀；编辑 system/tools/历史或压缩上下文后的续传需另行验证，能力表不解决前缀绑定。 Mythos 仅限通过验证的组织。"
+    },
+    {
       "pattern": "claude-mythos-5[-.]1.*",
       "name": "Claude Mythos 5.1",
       "provider": "anthropic",
@@ -193,8 +352,17 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "param": {
@@ -223,8 +391,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "param": {
@@ -253,8 +429,17 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "param": {
@@ -282,11 +467,23 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
-        "param": { "type": "adaptive", "display": "summarized" },
+        "param": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": true,
@@ -307,11 +504,23 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
-        "param": { "type": "adaptive", "display": "summarized" },
+        "param": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": true,
@@ -332,11 +541,21 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
-        "param": { "type": "adaptive" },
+        "param": {
+          "type": "adaptive"
+        },
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": false,
@@ -356,11 +575,21 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 64000 },
-      "efforts": ["low", "medium", "high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 64000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
-        "param": { "type": "adaptive" },
+        "param": {
+          "type": "adaptive"
+        },
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": false,
@@ -380,11 +609,21 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 200000, "max_output": 64000 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 200000,
+        "max_output": 64000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "high",
       "thinking_config": {
-        "param": { "type": "enabled", "budget_tokens": 16384 },
+        "param": {
+          "type": "enabled",
+          "budget_tokens": 16384
+        },
         "effort_param_name": "effort",
         "effort_location": "output_config",
         "disallow_sampling_when_thinking": false,
@@ -404,10 +643,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 200000, "max_output": 64000 },
+      "context": {
+        "max_input": 200000,
+        "max_output": 64000
+      },
       "efforts": [],
       "thinking_config": {
-        "param": { "type": "enabled", "budget_tokens": 16384 },
+        "param": {
+          "type": "enabled",
+          "budget_tokens": 16384
+        },
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content"
@@ -426,15 +671,33 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000, "max_context": 1000000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "medium",
       "thinking_config": {
-        "param": { "type": "adaptive", "display": "summarized" },
-        "disable_param": { "type": "disabled" },
+        "param": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "disable_param": {
+          "type": "disabled"
+        },
         "effort_param_name": "effort",
         "effort_location": "output_config",
-        "thinking_required_efforts": ["xhigh", "max"],
+        "thinking_required_efforts": [
+          "xhigh",
+          "max"
+        ],
         "disallow_sampling_when_thinking": true,
         "disallow_sampling_always": true,
         "response_field": "reasoning_content",
@@ -456,10 +719,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 200000, "max_output": 64000 },
+      "context": {
+        "max_input": 200000,
+        "max_output": 64000
+      },
       "efforts": [],
       "thinking_config": {
-        "param": { "type": "enabled", "budget_tokens": 16384 },
+        "param": {
+          "type": "enabled",
+          "budget_tokens": 16384
+        },
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content"
@@ -478,10 +747,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 200000, "max_output": 64000 },
+      "context": {
+        "max_input": 200000,
+        "max_output": 64000
+      },
       "efforts": [],
       "thinking_config": {
-        "param": { "type": "enabled", "budget_tokens": 16384 },
+        "param": {
+          "type": "enabled",
+          "budget_tokens": 16384
+        },
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content"
@@ -498,11 +773,13 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 200000, "max_output": 8192 },
+      "context": {
+        "max_input": 200000,
+        "max_output": 8192
+      },
       "efforts": [],
       "thinking_config": null
     },
-
     {
       "_comment": "======== OpenAI ========",
       "_source": "https://developers.openai.com/api/docs/models"
@@ -520,8 +797,17 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 922000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "response_features": {
         "request_reasoning_summary": true,
@@ -539,6 +825,50 @@
       }
     },
     {
+      "pattern": "gpt-6[.]1-terra(?:-\\d{4}-\\d{2}-\\d{2})?",
+      "name": "GPT-6.1 Terra",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000,
+        "max_context": 1050000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default_effort": "medium",
+      "response_features": {
+        "request_reasoning_summary": true,
+        "request_encrypted_reasoning": true,
+        "request_web_search_sources": true
+      },
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "allow_sampling_when_effort_none": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      },
+      "_source": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+      "_comment": "2026-10-26 发布。默认 medium，可用 none 关闭思考；仅关闭时允许 sampling。官方工具调用无论思考开关均须使用 Responses，Chat 仅支持无工具调用。"
+    },
+    {
       "pattern": "gpt-6[.]1-sol(?:-.*)?",
       "name": "GPT-6.1 Sol",
       "provider": "openai",
@@ -551,8 +881,18 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 922000, "max_output": 128000, "max_context": 1050000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000,
+        "max_context": 1050000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -583,7 +923,11 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 272000, "max_output": 128000, "max_context": 400000 },
+      "context": {
+        "max_input": 272000,
+        "max_output": 128000,
+        "max_context": 400000
+      },
       "efforts": [],
       "response_features": {
         "request_web_search_sources": true
@@ -605,8 +949,19 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 922000, "max_output": 128000, "max_context": 1050000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000,
+        "max_context": 1050000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -638,8 +993,19 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 922000, "max_output": 128000, "max_context": 1050000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000,
+        "max_context": 1050000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -671,7 +1037,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 272000, "max_output": 128000 },
+      "context": {
+        "max_input": 272000,
+        "max_output": 128000
+      },
       "efforts": [],
       "response_features": {
         "request_reasoning_summary": true,
@@ -699,7 +1068,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 272000, "max_output": 128000 },
+      "context": {
+        "max_input": 272000,
+        "max_output": 128000
+      },
       "efforts": [],
       "response_features": {
         "request_reasoning_summary": true,
@@ -727,8 +1099,18 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 922000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -757,8 +1139,18 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 922000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -788,8 +1180,18 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 922000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -819,8 +1221,18 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 922000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -850,8 +1262,18 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 922000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -880,8 +1302,15 @@
         "native_web_search": true,
         "structured_output": false
       },
-      "context": { "max_input": 1050000, "max_output": 128000 },
-      "efforts": ["medium", "high", "xhigh"],
+      "context": {
+        "max_input": 1050000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "high",
       "response_features": {
         "request_reasoning_summary": true,
@@ -909,8 +1338,17 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1050000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh"],
+      "context": {
+        "max_input": 1050000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -939,8 +1377,15 @@
         "native_web_search": true,
         "structured_output": false
       },
-      "context": { "max_input": 1050000, "max_output": 128000 },
-      "efforts": ["medium", "high", "xhigh"],
+      "context": {
+        "max_input": 1050000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -968,8 +1413,17 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 400000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh"],
+      "context": {
+        "max_input": 400000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "none",
       "response_features": {
         "request_reasoning_summary": true,
@@ -998,8 +1452,17 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1050000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh"],
+      "context": {
+        "max_input": 1050000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "none",
       "response_features": {
         "request_reasoning_summary": true,
@@ -1027,7 +1490,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 128000, "max_output": 16384 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 16384
+      },
       "efforts": [],
       "response_features": {
         "request_web_search_sources": true
@@ -1047,8 +1513,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 400000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh"],
+      "context": {
+        "max_input": 400000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -1075,7 +1549,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 128000, "max_output": 16384 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 16384
+      },
       "efforts": [],
       "response_features": {
         "request_web_search_sources": true
@@ -1095,8 +1572,15 @@
         "native_web_search": true,
         "structured_output": false
       },
-      "context": { "max_input": 400000, "max_output": 128000 },
-      "efforts": ["medium", "high", "xhigh"],
+      "context": {
+        "max_input": 400000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "high",
       "response_features": {
         "request_reasoning_summary": true,
@@ -1124,8 +1608,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 400000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh"],
+      "context": {
+        "max_input": 400000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -1153,8 +1645,17 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 400000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high", "xhigh"],
+      "context": {
+        "max_input": 400000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "none",
       "response_features": {
         "request_reasoning_summary": true,
@@ -1182,7 +1683,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 128000, "max_output": 16384 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 16384
+      },
       "efforts": [],
       "response_features": {
         "request_web_search_sources": true
@@ -1202,8 +1706,15 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 400000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 400000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -1231,8 +1742,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 400000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high"],
+      "context": {
+        "max_input": 400000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "none",
       "response_features": {
         "request_reasoning_summary": true,
@@ -1261,8 +1780,13 @@
         "native_web_search": true,
         "structured_output": false
       },
-      "context": { "max_input": 400000, "max_output": 272000 },
-      "efforts": ["high"],
+      "context": {
+        "max_input": 400000,
+        "max_output": 272000
+      },
+      "efforts": [
+        "high"
+      ],
       "default_effort": "high",
       "response_features": {
         "request_reasoning_summary": true,
@@ -1289,7 +1813,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 128000, "max_output": 16384 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 16384
+      },
       "efforts": [],
       "response_features": {
         "request_web_search_sources": true
@@ -1310,8 +1837,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 400000, "max_output": 128000 },
-      "efforts": ["minimal", "low", "medium", "high"],
+      "context": {
+        "max_input": 400000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -1339,8 +1874,16 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 131072, "max_output": 131072, "max_context": 131072 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 131072,
+        "max_output": 131072,
+        "max_context": 131072
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "thinking_config": {
         "param": null,
@@ -1364,8 +1907,15 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 200000, "max_output": 100000 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 200000,
+        "max_output": 100000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": false,
@@ -1394,7 +1944,10 @@
         "native_web_search": false,
         "structured_output": false
       },
-      "context": { "max_input": 128000, "max_output": 65536 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 65536
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -1418,8 +1971,15 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 200000, "max_output": 100000 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 200000,
+        "max_output": 100000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_reasoning_summary": true,
@@ -1446,7 +2006,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1047576, "max_output": 32768 },
+      "context": {
+        "max_input": 1047576,
+        "max_output": 32768
+      },
       "efforts": [],
       "response_features": {
         "request_web_search_sources": true
@@ -1466,7 +2029,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 128000, "max_output": 16384 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 16384
+      },
       "efforts": [],
       "response_features": {
         "request_web_search_sources": true
@@ -1486,14 +2052,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 128000, "max_output": 32768 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 32768
+      },
       "efforts": [],
       "response_features": {
         "request_web_search_sources": true
       },
       "thinking_config": null
     },
-
     {
       "_comment": "======== DeepSeek ========",
       "_source": "https://api-docs.deepseek.com/quick_start/pricing"
@@ -1510,7 +2078,10 @@
         "function_calling": false,
         "structured_output": false
       },
-      "context": { "max_input": 64000, "max_output": 8192 },
+      "context": {
+        "max_input": 64000,
+        "max_output": 8192
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -1529,19 +2100,42 @@
         "vision": true,
         "audio": false,
         "function_calling": true,
-        "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 384000, "max_context": 1000000 },
-      "efforts": ["low", "high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 384000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "high",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
-        "effort_map": { "minimal": "low", "medium": "high", "xhigh": "high", "ultra": "max" },
+        "effort_map": {
+          "minimal": "low",
+          "medium": "high",
+          "xhigh": "high",
+          "ultra": "max"
+        },
         "disallow_sampling_when_thinking": true,
         "min_top_p_when_thinking": 0.95,
         "fixed_top_p_when_not_thinking": 1.0,
@@ -1551,7 +2145,8 @@
         "preserve_reasoning_content": true
       },
       "_source": "https://api-docs.deepseek.com/quick_start/pricing/",
-      "_comment": "2026-09-10：推荐 ID 为 deepseek-flash；旧 deepseek-v4-flash / deepseek-v4-flash-vision-exp 已路由到 V4.1 Flash。支持视觉；当前 Responses API 忽略内置 web_search。"
+      "_comment": "2026-11-13：官方 Flash 开放 deepseek_web_search 与 deepseek_read_url，支持普通搜索和深度思考搜索；旧 web_search 仍被忽略，不能混用。DDchat 原生搜索按端点确认能力，第三方网关需手动确认。推荐 ID 为 deepseek-flash；旧 deepseek-v4-flash / deepseek-v4-flash-vision-exp 路由到 V4.1-Flash-1017。见 https://api-docs.deepseek.com/zh-cn/guides/web_tools/。",
+      "_native_search_client_compatibility": "Native tools are deepseek_web_search and deepseek_read_url. DDchat 2.11+ enables them through its client fallback. The optional native_web_search flag is omitted so older clients do not send unsupported generic web_search tools."
     },
     {
       "pattern": "deepseek-v4-pro(?:-.*)?",
@@ -1566,16 +2161,40 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 384000, "max_context": 1000000 },
-      "efforts": ["low", "high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 384000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "high",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
-        "effort_map": { "minimal": "low", "medium": "high", "xhigh": "high", "ultra": "max" },
+        "effort_map": {
+          "minimal": "low",
+          "medium": "high",
+          "xhigh": "high",
+          "ultra": "max"
+        },
         "disallow_sampling_when_thinking": true,
         "min_top_p_when_thinking": 0.95,
         "fixed_top_p_when_not_thinking": 1.0,
@@ -1600,16 +2219,40 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 384000, "max_context": 1000000 },
-      "efforts": ["low", "high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 384000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "high",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
-        "effort_map": { "minimal": "low", "medium": "high", "xhigh": "high", "ultra": "max" },
+        "effort_map": {
+          "minimal": "low",
+          "medium": "high",
+          "xhigh": "high",
+          "ultra": "max"
+        },
         "disallow_sampling_when_thinking": true,
         "min_top_p_when_thinking": 0.95,
         "fixed_top_p_when_not_thinking": 1.0,
@@ -1634,18 +2277,31 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 64000, "max_output": 8192 },
+      "context": {
+        "max_input": 64000,
+        "max_output": 8192
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": true,
         "response_field": "reasoning_content"
       }
     },
-
     {
       "_comment": "======== 通义千问 Qwen ========",
       "_source": "https://help.aliyun.com/zh/model-studio/qwen-api-via-openai-chat-completions"
@@ -1662,7 +2318,10 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 131072, "max_output": 32768 },
+      "context": {
+        "max_input": 131072,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -1671,6 +2330,142 @@
         "budget_param_name": "thinking_budget",
         "response_field": "reasoning_content"
       }
+    },
+    {
+      "pattern": "qwen4-max-preview",
+      "name": "Qwen4 Max Preview",
+      "provider": "qwen",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 393216,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default_effort": "xhigh",
+      "thinking_config": {
+        "request_extensions": [
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true,
+              "preserve_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          },
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
+        ],
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "effort_map": {
+          "minimal": "low",
+          "high": "xhigh",
+          "max": "xhigh"
+        },
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true,
+        "omit_effort_when_disabled": true
+      },
+      "_source": "https://help.aliyun.com/zh/model-studio/qwen4-max-preview",
+      "_comment": "2026-11-11 至 11-25 的 Token Plan 预览版；与正式版独立：默认 xhigh，档位 low/medium/xhigh，思考与回答共用 393216 输出预算。 Chat 显式 enable_thinking，关闭不发 effort；保留 reasoning_content，不同时发 thinking_budget。精确 ID 匹配。"
+    },
+    {
+      "pattern": "qwen4-max",
+      "name": "Qwen4 Max",
+      "provider": "qwen",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 983616,
+        "max_output": 131072,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "high",
+        "xhigh"
+      ],
+      "default_effort": "high",
+      "thinking_config": {
+        "request_extensions": [
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true,
+              "preserve_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          },
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
+        ],
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "effort_map": {
+          "minimal": "low",
+          "medium": "high",
+          "max": "xhigh"
+        },
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true,
+        "omit_effort_when_disabled": true
+      },
+      "_source": "https://help.aliyun.com/zh/model-studio/qwen4-max",
+      "_comment": "2026-11-16 正式版；默认 high，档位 low/high/xhigh，不继承 Preview 的 medium/xhigh 默认。思考模式总输出上限 262144，非思考 131072；当前表只有统一输出上限，因此保守使用两种模式均有效的 131072，输入采用较小的思考模式上限。 Chat 显式 enable_thinking，关闭不发 effort；保留 reasoning_content，不同时发 thinking_budget。精确 ID 匹配。"
     },
     {
       "_comment": "Qwen3.8 Flash 官方规格",
@@ -1689,13 +2484,24 @@
         "native_web_search": true,
         "structured_output": false
       },
-      "context": { "max_input": 983616, "max_output": 131072, "max_context": 1000000 },
-      "efforts": ["none", "low", "medium", "xhigh"],
+      "context": {
+        "max_input": 983616,
+        "max_output": 131072,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "xhigh"
+      ],
       "default_effort": "xhigh",
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["anthropic"],
+            "formats": [
+              "anthropic"
+            ],
             "param": {
               "type": "enabled"
             },
@@ -1731,16 +2537,38 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 983616, "max_output": 131072 },
-      "efforts": ["none", "low", "medium", "xhigh"],
+      "context": {
+        "max_input": 983616,
+        "max_output": 131072
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "xhigh"
+      ],
       "default_effort": "xhigh",
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
-        "effort_map": { "minimal": "low", "high": "xhigh", "max": "xhigh" },
+        "effort_map": {
+          "minimal": "low",
+          "high": "xhigh",
+          "max": "xhigh"
+        },
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content",
         "default_enabled": true,
@@ -1760,16 +2588,38 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 131072 },
-      "efforts": ["none", "low", "medium", "xhigh"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 131072
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "xhigh"
+      ],
       "default_effort": "xhigh",
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
-        "effort_map": { "minimal": "low", "high": "xhigh", "max": "xhigh" },
+        "effort_map": {
+          "minimal": "low",
+          "high": "xhigh",
+          "max": "xhigh"
+        },
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content",
         "default_enabled": true,
@@ -1789,13 +2639,23 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 131072 },
-      "efforts": ["none", "low", "medium", "xhigh"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 131072
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "xhigh"
+      ],
       "default_effort": "xhigh",
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["anthropic"],
+            "formats": [
+              "anthropic"
+            ],
             "param": {
               "type": "enabled"
             },
@@ -1829,12 +2689,36 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 262144, "max_output": 65536 },
+      "context": {
+        "max_input": 262144,
+        "max_output": 65536
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "enable_thinking": true }, "disable_param": { "enable_thinking": false }, "param_location": "top_level" },
-          { "formats": ["anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          },
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
@@ -1856,7 +2740,11 @@
         "native_web_search": false,
         "structured_output": false
       },
-      "context": { "max_input": 196608, "max_output": 65536, "max_context": 262144 },
+      "context": {
+        "max_input": 196608,
+        "max_output": 65536,
+        "max_context": 262144
+      },
       "efforts": [],
       "thinking_config": null,
       "_source": "https://help.aliyun.com/zh/model-studio/qwen3-5-omni-flash",
@@ -1875,12 +2763,36 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "enable_thinking": true }, "disable_param": { "enable_thinking": false }, "param_location": "top_level" },
-          { "formats": ["anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          },
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
@@ -1902,12 +2814,36 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "enable_thinking": true }, "disable_param": { "enable_thinking": false }, "param_location": "top_level" },
-          { "formats": ["anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          },
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
@@ -1929,12 +2865,36 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 262144, "max_output": 65536 },
+      "context": {
+        "max_input": 262144,
+        "max_output": 65536
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "enable_thinking": true }, "disable_param": { "enable_thinking": false }, "param_location": "top_level" },
-          { "formats": ["anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          },
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
@@ -1956,12 +2916,36 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 32768, "max_output": 8192 },
+      "context": {
+        "max_input": 32768,
+        "max_output": 8192
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "enable_thinking": true }, "disable_param": { "enable_thinking": false }, "param_location": "top_level" },
-          { "formats": ["anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          },
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
@@ -1983,12 +2967,36 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 262144, "max_output": 32768 },
+      "context": {
+        "max_input": 262144,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "enable_thinking": true }, "disable_param": { "enable_thinking": false }, "param_location": "top_level" },
-          { "formats": ["anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          },
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
@@ -2009,12 +3017,17 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 131072, "max_output": 32768 },
+      "context": {
+        "max_input": 131072,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat"],
+            "formats": [
+              "chat"
+            ],
             "param": {
               "enable_thinking": true
             },
@@ -2024,7 +3037,9 @@
             "param_location": "top_level"
           },
           {
-            "formats": ["anthropic"],
+            "formats": [
+              "anthropic"
+            ],
             "param": {
               "type": "enabled"
             },
@@ -2052,12 +3067,36 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 131072, "max_output": 32768 },
+      "context": {
+        "max_input": 131072,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "enable_thinking": true }, "disable_param": { "enable_thinking": false }, "param_location": "top_level" },
-          { "formats": ["anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          },
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
@@ -2078,12 +3117,36 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 131072, "max_output": 32768 },
+      "context": {
+        "max_input": 131072,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "enable_thinking": true }, "disable_param": { "enable_thinking": false }, "param_location": "top_level" },
-          { "formats": ["anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          },
+          {
+            "formats": [
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "budget_param_name": "thinking_budget",
@@ -2092,10 +3155,83 @@
         "default_enabled": false
       }
     },
-
     {
       "_comment": "======== Kimi / 月之暗面 ========",
       "_source": "https://platform.kimi.ai/docs/api/models-overview"
+    },
+    {
+      "pattern": "kimi-k3[.]1-pro-highspeed",
+      "name": "Kimi K3.1 Pro Highspeed",
+      "provider": "kimi",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true,
+        "native_web_search": false
+      },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 1048576,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "max",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      },
+      "_source": "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+      "_comment": "K3.1 Pro 与 Highspeed 共用参数约束。始终思考，low/high/max，默认 max；不发送 thinking 或固定采样参数，续传 reasoning_content。官方 max_completion_tokens 默认 131072、最高 1048576；1M 共享窗口保守按 1000000 预算并为输入预留空间。原生搜索暂不启用。"
+    },
+    {
+      "pattern": "kimi-k3[.]1-pro",
+      "name": "Kimi K3.1 Pro",
+      "provider": "kimi",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true,
+        "native_web_search": false
+      },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 1048576,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "max",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      },
+      "_source": "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+      "_comment": "K3.1 Pro 与 Highspeed 共用参数约束。始终思考，low/high/max，默认 max；不发送 thinking 或固定采样参数，续传 reasoning_content。官方 max_completion_tokens 默认 131072、最高 1048576；1M 共享窗口保守按 1000000 预算并为输入预留空间。原生搜索暂不启用。"
     },
     {
       "pattern": "kimi-k3.*",
@@ -2109,8 +3245,15 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 131072 },
-      "efforts": ["low", "high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 131072
+      },
+      "efforts": [
+        "low",
+        "high",
+        "max"
+      ],
       "default_effort": "max",
       "thinking_config": {
         "param": null,
@@ -2135,7 +3278,10 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 256000, "max_output": 131072 },
+      "context": {
+        "max_input": 256000,
+        "max_output": 131072
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -2159,11 +3305,25 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 256000, "max_output": 131072 },
+      "context": {
+        "max_input": 256000,
+        "max_output": 131072
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": true,
@@ -2184,11 +3344,25 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 256000, "max_output": 131072 },
+      "context": {
+        "max_input": 256000,
+        "max_output": 131072
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": true,
@@ -2209,7 +3383,10 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 256000, "max_output": 131072 },
+      "context": {
+        "max_input": 256000,
+        "max_output": 131072
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -2219,7 +3396,6 @@
         "response_field": "reasoning_content"
       }
     },
-
     {
       "_comment": "======== 智谱 GLM ========",
       "_source": "https://docs.z.ai/guides/overview/overview"
@@ -2236,11 +3412,25 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 200000, "max_output": 128000 },
+      "context": {
+        "max_input": 200000,
+        "max_output": 128000
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
@@ -2260,11 +3450,25 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 128000, "max_output": 32000 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 32000
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
@@ -2284,11 +3488,25 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 64000, "max_output": 16000 },
+      "context": {
+        "max_input": 64000,
+        "max_output": 16000
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
@@ -2299,6 +3517,51 @@
     {
       "_comment": "GLM-5.3 Flash 多模态来源",
       "_source": "https://autoclaw.z.ai/blog/model/glm-5.3-flash/"
+    },
+    {
+      "pattern": "glm-5[-.]3-flashx-legal",
+      "name": "GLM-5.3 FlashX Legal",
+      "provider": "zhipu",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "max",
+      "thinking_config": {
+        "request_extensions": [
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            }
+          }
+        ],
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      },
+      "_source": "https://docs.z.ai/guides/vlm/glm-5.3-flash",
+      "_comment": "法律工作流专用，API 仅向申请获批的企业客户开放；官方与 Flash/FlashX 共用参数说明。始终开启思考，low/high/max，默认 max。该规则只声明模型能力，不授予账号访问权限。"
     },
     {
       "pattern": "glm-5[-.]3-flashx(?:-.*)?",
@@ -2312,13 +3575,24 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000, "max_context": 1000000 },
-      "efforts": ["low", "high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "high",
+        "max"
+      ],
       "default_effort": "max",
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat", "anthropic"],
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
             "param": {
               "type": "enabled"
             }
@@ -2345,13 +3619,23 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "high",
+        "max"
+      ],
       "default_effort": "max",
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat", "anthropic"],
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
             "param": {
               "type": "enabled"
             }
@@ -2378,12 +3662,27 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "high",
+        "max"
+      ],
       "default_effort": "max",
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            }
+          }
         ],
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
@@ -2405,12 +3704,29 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["high", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "high",
+        "max"
+      ],
       "default_effort": "max",
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
@@ -2432,11 +3748,25 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 200000, "max_output": 128000 },
+      "context": {
+        "max_input": 200000,
+        "max_output": 128000
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
@@ -2457,11 +3787,25 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 128000, "max_output": 96000 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 96000
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
@@ -2469,7 +3813,6 @@
         "default_enabled": true
       }
     },
-
     {
       "_comment": "======== 豆包 Doubao ========",
       "_source": "https://www.volcengine.com/docs/82379/1330310"
@@ -2487,18 +3830,48 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1024000, "max_output": 256000 },
-      "efforts": ["none", "minimal", "low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1024000,
+        "max_output": 256000
+      },
+      "efforts": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "responses", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "responses",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
-        "disable_param": { "reasoning_effort": "minimal" },
+        "disable_param": {
+          "reasoning_effort": "minimal"
+        },
         "param_location": "top_level",
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
-        "effort_map": { "none": "minimal", "minimal": "minimal", "xhigh": "high", "max": "high" },
+        "effort_map": {
+          "none": "minimal",
+          "minimal": "minimal",
+          "xhigh": "high",
+          "max": "high"
+        },
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content",
         "default_enabled": true,
@@ -2506,7 +3879,9 @@
       },
       "response_features": {
         "request_encrypted_reasoning": true
-      }
+      },
+      "_source": "https://console.volcengine.com/ark/region%3Acn-beijing/docs/model-release-announcement",
+      "_comment": " 2026-11-15 公告仍使用 doubao-seed-evolving 自动升级，未公布新的调用 ID 或参数上限；本次保留现有能力配置。"
     },
     {
       "pattern": "doubao-seed-2[-.]1-(?:pro|turbo).*",
@@ -2521,18 +3896,48 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 256000, "max_output": 256000 },
-      "efforts": ["none", "minimal", "low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 256000,
+        "max_output": 256000
+      },
+      "efforts": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "responses", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "responses",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
-        "disable_param": { "reasoning_effort": "minimal" },
+        "disable_param": {
+          "reasoning_effort": "minimal"
+        },
         "param_location": "top_level",
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
-        "effort_map": { "none": "minimal", "minimal": "minimal", "xhigh": "high", "max": "high" },
+        "effort_map": {
+          "none": "minimal",
+          "minimal": "minimal",
+          "xhigh": "high",
+          "max": "high"
+        },
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content",
         "default_enabled": true,
@@ -2555,22 +3960,130 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 128000, "max_output": 16384 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 16384
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "responses", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "responses",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content",
-        "auto_param": { "type": "auto" }
+        "auto_param": {
+          "type": "auto"
+        }
       }
     },
-
     {
       "_comment": "======== 腾讯混元 Hunyuan ========",
       "_source": "https://cloud.tencent.com/document/product/1823/130051"
+    },
+    {
+      "pattern": "hy4-flash",
+      "name": "腾讯混元 Hy4 Flash",
+      "provider": "hunyuan",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 960000,
+        "max_output": 64000,
+        "max_context": 1024000
+      },
+      "efforts": [
+        "none",
+        "high"
+      ],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true,
+        "request_extensions": [
+          {
+            "formats": [
+              "chat"
+            ],
+            "disable_param": {
+              "reasoning_effort": "no_think"
+            },
+            "param_location": "top_level"
+          }
+        ]
+      },
+      "_source": "https://cloud.tencent.com/document/product/1823/130051",
+      "_comment": "2026-11-16 官方模型列表已列出 Flash，原生搜索矩阵尚未列出，因此不启用原生联网。 默认 high，可关闭；Chat 关闭用 no_think，Responses 用 none，Messages 用 disabled。见 https://cloud.tencent.com/document/product/1823/131208 和 https://cloud.tencent.com/document/product/1823/132358。"
+    },
+    {
+      "pattern": "hy4",
+      "name": "腾讯混元 Hy4",
+      "provider": "hunyuan",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 960000,
+        "max_output": 64000,
+        "max_context": 1024000
+      },
+      "efforts": [
+        "none",
+        "high"
+      ],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true,
+        "request_extensions": [
+          {
+            "formats": [
+              "chat"
+            ],
+            "disable_param": {
+              "reasoning_effort": "no_think"
+            },
+            "param_location": "top_level"
+          }
+        ]
+      },
+      "_source": "https://cloud.tencent.com/document/product/1823/130051",
+      "_comment": "2026-11-04 正式版新增图片理解；TokenHub 原生联网使用 Responses web_search，需开通搜索服务。 默认 high，可关闭；Chat 关闭用 no_think，Responses 用 none，Messages 用 disabled。见 https://cloud.tencent.com/document/product/1823/131208 和 https://cloud.tencent.com/document/product/1823/132358。"
     },
     {
       "pattern": "hy4-preview",
@@ -2585,8 +4098,15 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 960000, "max_output": 64000, "max_context": 1024000 },
-      "efforts": ["none", "high"],
+      "context": {
+        "max_input": 960000,
+        "max_output": 64000,
+        "max_context": 1024000
+      },
+      "efforts": [
+        "none",
+        "high"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "param": null,
@@ -2595,8 +4115,21 @@
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content",
         "default_enabled": true,
-        "preserve_reasoning_content": true
-      }
+        "preserve_reasoning_content": true,
+        "request_extensions": [
+          {
+            "formats": [
+              "chat"
+            ],
+            "disable_param": {
+              "reasoning_effort": "no_think"
+            },
+            "param_location": "top_level"
+          }
+        ]
+      },
+      "_source": "https://cloud.tencent.com/document/product/1823/131208",
+      "_comment": "2026-11-16 核对：Chat 关闭思考必须用 no_think，仅作用于 Chat；Responses 保留 none，Messages 沿用 adaptive/disabled。Preview 将于 2026-12-07 下线，保留历史匹配，不继承正式版视觉和联网。"
     },
     {
       "pattern": "hy3",
@@ -2611,19 +4144,39 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 192000, "max_output": 128000, "max_context": 256000 },
-      "efforts": ["low", "high"],
-      "default_effort": "low",
+      "context": {
+        "max_input": 192000,
+        "max_output": 128000,
+        "max_context": 256000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "high"
+      ],
+      "default_effort": "high",
       "thinking_config": {
         "param": null,
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
         "disallow_sampling_when_thinking": false,
         "response_field": "reasoning_content",
-        "default_enabled": false,
-        "preserve_reasoning_content": true
+        "default_enabled": true,
+        "preserve_reasoning_content": true,
+        "request_extensions": [
+          {
+            "formats": [
+              "chat"
+            ],
+            "disable_param": {
+              "reasoning_effort": "no_think"
+            },
+            "param_location": "top_level"
+          }
+        ]
       },
-      "_source": "https://cloud.tencent.com/document/product/1823/132252"
+      "_source": "https://cloud.tencent.com/document/product/1823/131208",
+      "_comment": "2026-11-16 核对：Chat 关闭思考必须用 no_think，仅作用于 Chat；Responses 保留 none，Messages 沿用 adaptive/disabled。TokenHub 已支持 Responses web_search；需开通搜索服务。 按当前文档修正为默认开启、high 强度；补齐界面关闭档。"
     },
     {
       "pattern": "hy3-preview",
@@ -2638,8 +4191,14 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 262144, "max_output": 128000 },
-      "efforts": ["low", "high"],
+      "context": {
+        "max_input": 262144,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "high"
+      ],
       "default_effort": "low",
       "thinking_config": {
         "param": null,
@@ -2663,7 +4222,10 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 32000, "max_output": 64000 },
+      "context": {
+        "max_input": 32000,
+        "max_output": 64000
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -2683,11 +4245,13 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 128000, "max_output": 16384 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 16384
+      },
       "efforts": [],
       "thinking_config": null
     },
-
     {
       "_comment": "======== 阶跃星辰 Step ========",
       "_source": "https://platform.stepfun.com/docs/zh/guides/models/step-3.7-flash"
@@ -2705,13 +4269,23 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 64000, "max_context": 1000000 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 64000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat"],
+            "formats": [
+              "chat"
+            ],
             "param": {
               "reasoning_format": "deepseek-style"
             },
@@ -2740,13 +4314,22 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 256000, "max_output": 32768 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 256000,
+        "max_output": 32768
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat"],
+            "formats": [
+              "chat"
+            ],
             "param": {
               "reasoning_format": "deepseek-style"
             },
@@ -2772,12 +4355,26 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 256000, "max_output": 32768 },
-      "efforts": ["low", "high"],
+      "context": {
+        "max_input": 256000,
+        "max_output": 32768
+      },
+      "efforts": [
+        "low",
+        "high"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "reasoning_format": "deepseek-style" }, "param_location": "top_level" }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "reasoning_format": "deepseek-style"
+            },
+            "param_location": "top_level"
+          }
         ],
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
@@ -2798,11 +4395,22 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 256000, "max_output": 32768 },
+      "context": {
+        "max_input": 256000,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "reasoning_format": "deepseek-style" }, "param_location": "top_level" }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "reasoning_format": "deepseek-style"
+            },
+            "param_location": "top_level"
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
@@ -2822,11 +4430,22 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 64000, "max_output": 32768 },
+      "context": {
+        "max_input": 64000,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "reasoning_format": "deepseek-style" }, "param_location": "top_level" }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "reasoning_format": "deepseek-style"
+            },
+            "param_location": "top_level"
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
@@ -2846,11 +4465,22 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 100000, "max_output": 32768 },
+      "context": {
+        "max_input": 100000,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat"], "param": { "reasoning_format": "deepseek-style" }, "param_location": "top_level" }
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "reasoning_format": "deepseek-style"
+            },
+            "param_location": "top_level"
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": false,
@@ -2858,7 +4488,6 @@
         "default_enabled": true
       }
     },
-
     {
       "_comment": "======== 小米 MiMo ========",
       "_source": "https://mimo.mi.com/static/docs/quick-start/summary/model.md",
@@ -2877,12 +4506,19 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 1048576, "max_output": 131072, "max_context": 1048576 },
+      "context": {
+        "max_input": 1048576,
+        "max_output": 131072,
+        "max_context": 1048576
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat", "anthropic"],
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
             "param": {
               "type": "enabled"
             },
@@ -2913,12 +4549,19 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 1048576, "max_output": 131072, "max_context": 1048576 },
+      "context": {
+        "max_input": 1048576,
+        "max_output": 131072,
+        "max_context": 1048576
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat", "anthropic"],
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
             "param": {
               "type": "enabled"
             },
@@ -2949,12 +4592,19 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 1048576, "max_output": 131072, "max_context": 1048576 },
+      "context": {
+        "max_input": 1048576,
+        "max_output": 131072,
+        "max_context": 1048576
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat", "anthropic"],
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
             "param": {
               "type": "enabled"
             },
@@ -2985,12 +4635,18 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat", "anthropic"],
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
             "param": {
               "type": "enabled"
             },
@@ -3019,11 +4675,25 @@
         "native_web_search": false,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
-          { "formats": ["chat", "anthropic"], "param": { "type": "enabled" }, "disable_param": { "type": "disabled" } }
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
         ],
         "effort_param_name": null,
         "disallow_sampling_when_thinking": true,
@@ -3044,7 +4714,10 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 256000, "max_output": 128000 },
+      "context": {
+        "max_input": 256000,
+        "max_output": 128000
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -3065,7 +4738,10 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -3086,7 +4762,10 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 256000, "max_output": 64000 },
+      "context": {
+        "max_input": 256000,
+        "max_output": 64000
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -3095,7 +4774,6 @@
         "response_field": "reasoning_content"
       }
     },
-
     {
       "_comment": "======== MiniMax ========",
       "_source": "https://platform.minimax.io/docs/api-reference/text-chat-openai"
@@ -3113,18 +4791,37 @@
         "structured_output": false,
         "native_web_search": false
       },
-      "context": { "max_input": 1000000, "max_output": 524288, "max_context": 1000000 },
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 524288,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "max",
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat", "anthropic"],
-            "param": { "type": "adaptive" }
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "adaptive"
+            }
           },
           {
-            "formats": ["chat"],
-            "request_params": { "reasoning_split": true }
+            "formats": [
+              "chat"
+            ],
+            "request_params": {
+              "reasoning_split": true
+            }
           }
         ],
         "effort_param_name": "reasoning_effort",
@@ -3135,7 +4832,63 @@
         "preserve_reasoning_content": true
       },
       "_source": "https://platform.minimax.io/docs/api-reference/text-chat-openai",
-      "_comment": "当前仅 M Plan / MiniMax Code 可用。始终思考，默认 max；disabled/none 返回 400。Chat 用 reasoning_effort，Responses 用 reasoning.effort，Messages 用 output_config.effort。reasoning_split 仅 Chat 使用。1M 共享窗口保守按 1000000 预算。"
+      "_comment": "历史 Preview 兼容规则；当前官方正式版 ID 为 MiniMax-M3.1-Flash，使用独立规则。预览阶段仅 M Plan / MiniMax Code 可用。始终思考，默认 max；disabled/none 返回 400。Chat 用 reasoning_effort，Responses 用 reasoning.effort，Messages 用 output_config.effort。reasoning_split 仅 Chat 使用。1M 共享窗口保守按 1000000 预算。"
+    },
+    {
+      "pattern": "(?:minimax/)?minimax-m3[.]1-flash",
+      "name": "MiniMax M3.1 Flash",
+      "provider": "minimax",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "structured_output": false,
+        "native_web_search": false
+      },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 524288,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default_effort": "max",
+      "thinking_config": {
+        "request_extensions": [
+          {
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
+            "param": {
+              "type": "adaptive"
+            }
+          },
+          {
+            "formats": [
+              "chat"
+            ],
+            "request_params": {
+              "reasoning_split": true
+            }
+          }
+        ],
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      },
+      "_source": "https://platform.minimax.io/docs/api-reference/text-chat-openai",
+      "_comment": "2026-10-19 发布正式版。始终思考，五档强度默认 max；disabled/none 返回 400。Chat 用 reasoning_effort 与 reasoning_split，Messages 用 adaptive + output_config.effort，Responses 用 reasoning.effort。1M 共享窗口保守按 1000000 预算；最大输出 524288，官方建议 131072。"
     },
     {
       "pattern": "(?:minimax/)?minimax-m3.*",
@@ -3150,12 +4903,19 @@
         "structured_output": false,
         "native_web_search": false
       },
-      "context": { "max_input": 1000000, "max_output": 524288, "max_context": 1000000 },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 524288,
+        "max_context": 1000000
+      },
       "efforts": [],
       "thinking_config": {
         "request_extensions": [
           {
-            "formats": ["chat", "anthropic"],
+            "formats": [
+              "chat",
+              "anthropic"
+            ],
             "param": {
               "type": "adaptive"
             },
@@ -3164,7 +4924,9 @@
             }
           },
           {
-            "formats": ["chat"],
+            "formats": [
+              "chat"
+            ],
             "request_params": {
               "reasoning_split": true
             }
@@ -3192,7 +4954,11 @@
         "structured_output": false,
         "native_web_search": false
       },
-      "context": { "max_input": 204800, "max_output": 204800, "max_context": 204800 },
+      "context": {
+        "max_input": 204800,
+        "max_output": 204800,
+        "max_context": 204800
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -3226,7 +4992,10 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 204800, "max_output": 32768 },
+      "context": {
+        "max_input": 204800,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -3235,7 +5004,6 @@
         "response_field": "reasoning_content"
       }
     },
-
     {
       "_comment": "======== xAI Grok ========",
       "_source": "https://docs.x.ai/developers/model-capabilities/text/reasoning"
@@ -3252,7 +5020,10 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 256000, "max_output": 32768 },
+      "context": {
+        "max_input": 256000,
+        "max_output": 32768
+      },
       "efforts": [],
       "response_features": {
         "request_encrypted_reasoning": true
@@ -3278,8 +5049,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "medium",
       "response_features": {
         "request_encrypted_reasoning": true,
@@ -3306,7 +5085,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
       "efforts": [],
       "response_features": {
         "request_web_search_sources": true
@@ -3326,7 +5108,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
       "efforts": [],
       "response_features": {
         "request_encrypted_reasoning": true,
@@ -3353,8 +5138,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
-      "efforts": ["none", "low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "none",
       "response_features": {
         "request_encrypted_reasoning": true,
@@ -3362,7 +5155,9 @@
       },
       "thinking_config": {
         "param": null,
-        "disable_param": { "reasoning_effort": "none" },
+        "disable_param": {
+          "reasoning_effort": "none"
+        },
         "param_location": "top_level",
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
@@ -3385,8 +5180,17 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 500000, "max_output": 500000, "max_context": 500000 },
-      "efforts": ["low", "medium", "high", "xhigh"],
+      "context": {
+        "max_input": 500000,
+        "max_output": 500000,
+        "max_context": 500000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "high",
       "response_features": {
         "request_encrypted_reasoning": true,
@@ -3416,8 +5220,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 500000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high", "xhigh"],
+      "context": {
+        "max_input": 500000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
       "default_effort": "high",
       "response_features": {
         "request_encrypted_reasoning": true,
@@ -3445,8 +5257,15 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 500000, "max_output": 128000 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 500000,
+        "max_output": 128000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "high",
       "response_features": {
         "request_encrypted_reasoning": true,
@@ -3474,7 +5293,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 256000, "max_output": 128000 },
+      "context": {
+        "max_input": 256000,
+        "max_output": 128000
+      },
       "efforts": [],
       "response_features": {
         "request_encrypted_reasoning": true,
@@ -3500,7 +5322,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
       "efforts": [],
       "response_features": {
         "request_web_search_sources": true
@@ -3520,7 +5345,10 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 128000 },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000
+      },
       "efforts": [],
       "response_features": {
         "request_encrypted_reasoning": true,
@@ -3546,7 +5374,10 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 256000, "max_output": 32768 },
+      "context": {
+        "max_input": 256000,
+        "max_output": 32768
+      },
       "efforts": [],
       "response_features": {
         "request_encrypted_reasoning": true
@@ -3570,8 +5401,14 @@
         "function_calling": true,
         "structured_output": false
       },
-      "context": { "max_input": 131072, "max_output": 32768 },
-      "efforts": ["low", "high"],
+      "context": {
+        "max_input": 131072,
+        "max_output": 32768
+      },
+      "efforts": [
+        "low",
+        "high"
+      ],
       "default_effort": "low",
       "response_features": {
         "request_encrypted_reasoning": true
@@ -3584,7 +5421,6 @@
         "response_field": "reasoning_content"
       }
     },
-
     {
       "_comment": "======== Mistral ========",
       "_source": "https://docs.mistral.ai/studio/conversations/reasoning"
@@ -3601,7 +5437,10 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 131072, "max_output": 32768 },
+      "context": {
+        "max_input": 131072,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -3622,8 +5461,14 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 256000, "max_output": 64000 },
-      "efforts": ["none", "high"],
+      "context": {
+        "max_input": 256000,
+        "max_output": 64000
+      },
+      "efforts": [
+        "none",
+        "high"
+      ],
       "default_effort": "none",
       "thinking_config": {
         "param": null,
@@ -3644,7 +5489,10 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 128000, "max_output": 32768 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": null
     },
@@ -3660,8 +5508,14 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 256000, "max_output": 64000 },
-      "efforts": ["none", "high"],
+      "context": {
+        "max_input": 256000,
+        "max_output": 64000
+      },
+      "efforts": [
+        "none",
+        "high"
+      ],
       "default_effort": "none",
       "thinking_config": {
         "param": null,
@@ -3682,11 +5536,13 @@
         "function_calling": true,
         "structured_output": true
       },
-      "context": { "max_input": 128000, "max_output": 32768 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 32768
+      },
       "efforts": [],
       "thinking_config": null
     },
-
     {
       "_comment": "======== Google Gemini ========",
       "_source": "https://ai.google.dev/gemini-api/docs/openai"
@@ -3694,6 +5550,115 @@
     {
       "_comment": "Gemini 3.8 Flash 官方规格",
       "_source": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+    },
+    {
+      "pattern": "gemini-4-carbon",
+      "name": "Gemini 4 Carbon",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 1048576,
+        "max_output": 65536,
+        "max_context": 1048576
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      },
+      "_source": "https://aistudio.google.com/docs/models/gemini-4-carbon",
+      "_comment": "2026-11-10 发布；low/medium/high，默认 medium。 始终思考，不发送 sampling；输入与输出共用 1048576，普通同步输出 65536。长输出需后台 long decode，当前不启用。精确匹配以排除媒体及未知型号。"
+    },
+    {
+      "pattern": "gemini-4-hydrogen",
+      "name": "Gemini 4 Hydrogen",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 1048576,
+        "max_output": 65536,
+        "max_context": 1048576
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "default_effort": "high",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      },
+      "_source": "https://aistudio.google.com/docs/models/gemini-4-hydrogen",
+      "_comment": "2026-11-12 发布；low/medium/high/xhigh，默认 high；OpenAI 兼容接口可直接传 xhigh。 始终思考，不发送 sampling；输入与输出共用 1048576，普通同步输出 65536。长输出需后台 long decode，当前不启用。精确匹配以排除媒体及未知型号。"
+    },
+    {
+      "pattern": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 1048576,
+        "max_output": 65536,
+        "max_context": 1048576
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default_effort": "medium",
+      "thinking_config": {
+        "param": null,
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_when_thinking": true,
+        "disallow_sampling_always": true,
+        "response_field": "reasoning_content",
+        "default_enabled": true
+      },
+      "_source": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+      "_comment": "2026-10-13 发布。输入与输出共享 1048576 窗口；普通同步请求最大输出 65536，不启用需要后台长生成协议的 1M 输出。OpenAI 兼容接口支持 reasoning_effort low/medium/high，默认 medium；不发送 sampling。精确匹配，避免未来媒体型号继承聊天能力。"
     },
     {
       "pattern": "gemini-3\\.8-flash(?!.*-(?:live|tts|image)(?:[-:]|$)).*",
@@ -3708,8 +5673,15 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1048576, "max_output": 65536 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 1048576,
+        "max_output": 65536
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "thinking_config": {
         "param": null,
@@ -3734,8 +5706,15 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1048576, "max_output": 65536 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 1048576,
+        "max_output": 65536
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "thinking_config": {
         "param": null,
@@ -3760,8 +5739,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": ["minimal", "low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
+      "efforts": [
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "thinking_config": {
         "param": null,
@@ -3786,8 +5773,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": ["minimal", "low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
+      "efforts": [
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "thinking_config": {
         "param": null,
@@ -3812,8 +5807,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": ["minimal", "low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
+      "efforts": [
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "minimal",
       "thinking_config": {
         "param": null,
@@ -3838,8 +5841,15 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "param": null,
@@ -3863,8 +5873,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": ["minimal", "low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
+      "efforts": [
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "minimal",
       "thinking_config": {
         "param": null,
@@ -3888,8 +5906,16 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": ["minimal", "low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
+      "efforts": [
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "high",
       "thinking_config": {
         "param": null,
@@ -3913,8 +5939,15 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": ["low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "thinking_config": {
         "param": null,
@@ -3938,12 +5971,23 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": ["none", "minimal", "low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
+      "efforts": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "none",
       "thinking_config": {
         "param": null,
-        "disable_param": { "reasoning_effort": "none" },
+        "disable_param": {
+          "reasoning_effort": "none"
+        },
         "param_location": "top_level",
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
@@ -3966,12 +6010,23 @@
         "native_web_search": true,
         "structured_output": true
       },
-      "context": { "max_input": 1000000, "max_output": 65536 },
-      "efforts": ["none", "minimal", "low", "medium", "high"],
+      "context": {
+        "max_input": 1000000,
+        "max_output": 65536
+      },
+      "efforts": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "thinking_config": {
         "param": null,
-        "disable_param": { "reasoning_effort": "none" },
+        "disable_param": {
+          "reasoning_effort": "none"
+        },
         "param_location": "top_level",
         "effort_param_name": "reasoning_effort",
         "effort_location": "top_level",
@@ -3981,7 +6036,6 @@
         "default_enabled": true
       }
     },
-
     {
       "_comment": "======== 硅基流动 SiliconFlow (中转平台) ========",
       "_source": "https://docs.siliconflow.cn/cn/userguide/capabilities/reasoning"
@@ -3998,7 +6052,10 @@
         "function_calling": false,
         "structured_output": false
       },
-      "context": { "max_input": 64000, "max_output": 8192 },
+      "context": {
+        "max_input": 64000,
+        "max_output": 8192
+      },
       "efforts": [],
       "thinking_config": {
         "param": null,
@@ -4010,9 +6067,52 @@
       "_source": "https://docs.siliconflow.cn/docs/userguide/capabilities/reasoning",
       "_comment": "官方 R1 调用建议允许 temperature 与 top_p；保留中转规则的独立匹配优先级。"
     },
-
     {
       "_comment": "======== 兜底规则 ========"
+    },
+    {
+      "pattern": "(?:antdigital/)?ling-3[.]1-flash",
+      "name": "Ling 3.1 Flash",
+      "provider": "ant",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 1048576,
+        "max_output": 262144,
+        "max_context": 1048576
+      },
+      "efforts": [],
+      "thinking_config": {
+        "request_extensions": [
+          {
+            "formats": [
+              "chat"
+            ],
+            "param": {
+              "enable_thinking": true,
+              "preserve_thinking": true
+            },
+            "disable_param": {
+              "enable_thinking": false
+            },
+            "param_location": "top_level"
+          }
+        ],
+        "effort_param_name": null,
+        "disallow_sampling_when_thinking": false,
+        "response_field": "reasoning_content",
+        "default_enabled": true,
+        "preserve_reasoning_content": true
+      },
+      "_source": "https://help.aliyun.com/en/model-studio/antdigital",
+      "_comment": "2026-10-29 百炼北京区上架，使用已开通的 antdigital/Ling-3.1-flash 与对应工作空间 OpenAI 兼容地址。仅文本；默认思考，Chat 通过 enable_thinking 开关，无 reasoning_effort/thinking_budget。结构化输出仅 json_object，不支持 json_schema。preserve_thinking 仅 Chat 开启时发送。规格见 https://help.aliyun.com/en/model-studio/ling-3-1-flash-by-antdigital；其他协议仅沿用网关通用映射，未确认厂商直连支持。"
     },
     {
       "pattern": ".*",
@@ -4025,7 +6125,10 @@
         "function_calling": false,
         "structured_output": false
       },
-      "context": { "max_input": 128000, "max_output": 16384 },
+      "context": {
+        "max_input": 128000,
+        "max_output": 16384
+      },
       "efforts": [],
       "thinking_config": null
     }

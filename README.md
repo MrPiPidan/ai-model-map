@@ -34,6 +34,18 @@ A comprehensive, community-maintained registry of AI model capabilities across a
 
 ## Usage
 
+### DDchat compatibility (v28)
+
+The current table has 161 matching rules. DeepSeek Flash's native tools use
+`deepseek_web_search` and `deepseek_read_url`, which require DDchat 2.11 or newer.
+Its optional `native_web_search` flag is deliberately omitted in this public
+table: newer DDchat clients enable the supported tools through their built-in
+model check, while older clients retain their existing client-side search.
+Do not replace this omission with `true` without checking old-client requests.
+The bundled DDchat 2.11 table explicitly enables the same capability; all other
+model capability fields are identical. The OTA file can be generated from the
+DDchat source with `Scripts/prepare-model-capability-ota.py`.
+
 ### Direct URL (via jsDelivr CDN)
 
 ```
