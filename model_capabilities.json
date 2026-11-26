@@ -1,6 +1,6 @@
 {
-  "version": 28,
-  "updated": "2026-11-16",
+  "version": 29,
+  "updated": "2026-11-20",
   "notes": "模型能力配置表，pattern 从上到下匹配，首个命中生效，最后一条 .* 兜底",
   "rules": [
     {
@@ -783,6 +783,90 @@
     {
       "_comment": "======== OpenAI ========",
       "_source": "https://developers.openai.com/api/docs/models"
+    },
+    {
+      "pattern": "gpt-6[.]2-astra",
+      "name": "GPT-6.2 Astra",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000,
+        "max_context": 1050000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default_effort": "medium",
+      "response_features": {
+        "tools_require_responses": true,
+        "request_reasoning_summary": true,
+        "request_encrypted_reasoning": true,
+        "request_web_search_sources": true
+      },
+      "thinking_config": {
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_always": true,
+        "default_enabled": true,
+        "response_field": "reasoning_content"
+      },
+      "_source": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+      "_comment": "DDchat 按官方迁移指南推荐的开始档位选择 medium。官方工具调用使用 Responses。"
+    },
+    {
+      "pattern": "gpt-6[.]2-sol",
+      "name": "GPT-6.2 Sol",
+      "provider": "openai",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": true,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 922000,
+        "max_output": 128000,
+        "max_context": 1050000
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default_effort": "medium",
+      "response_features": {
+        "tools_require_responses": true,
+        "request_reasoning_summary": true,
+        "request_encrypted_reasoning": true,
+        "request_web_search_sources": true
+      },
+      "thinking_config": {
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_always": true,
+        "default_enabled": true,
+        "response_field": "reasoning_content"
+      },
+      "_source": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+      "_comment": "DDchat 按官方迁移指南推荐的开始档位选择 medium。官方工具调用使用 Responses。"
     },
     {
       "pattern": "gpt-6-astra.*",
@@ -5552,6 +5636,41 @@
       "_source": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
     },
     {
+      "pattern": "gemini-4-neon",
+      "name": "Gemini 4 Neon",
+      "provider": "google",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": true,
+        "audio": true,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 1048576,
+        "max_output": 65536,
+        "max_context": 1048576
+      },
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "default_effort": "high",
+      "thinking_config": {
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "disallow_sampling_always": true,
+        "default_enabled": true,
+        "response_field": "reasoning_content"
+      },
+      "_source": "https://aistudio.google.com/docs/models/gemini-4-neon",
+      "_comment": "普通同步请求最多输出 65536，包含思考。Google Search grounding 可在 Google 原生 API 使用，DDchat 的 Google 预设使用 Chat 兼容接口。"
+    },
+    {
       "pattern": "gemini-4-carbon",
       "name": "Gemini 4 Carbon",
       "provider": "google",
@@ -6068,7 +6187,125 @@
       "_comment": "官方 R1 调用建议允许 temperature 与 top_p；保留中转规则的独立匹配优先级。"
     },
     {
-      "_comment": "======== 兜底规则 ========"
+      "_comment": "======== 百度文心 ERNIE ========"
+    },
+    {
+      "pattern": "ernie-5[.]5-flash-preview",
+      "name": "ERNIE 5.5 Flash Preview",
+      "provider": "baidu",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": true,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false
+      },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 64000,
+        "max_context": 1000000
+      },
+      "efforts": [],
+      "thinking_config": {
+        "default_enabled": true,
+        "response_field": "reasoning_content"
+      },
+      "_source": "https://cloud.baidu.com/doc/qianfan-api/s/wmwbl48n4",
+      "_comment": "思考固定 high，API 不支持调档。千帆目录列出最高 1M 输出，DDchat 采用产品公布的默认 64K 作为单次预算。"
+    },
+    {
+      "pattern": "ernie-light-dt-1[.]0",
+      "name": "ERNIE Light DT 1.0",
+      "provider": "baidu",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": false,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false
+      },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 128000,
+        "max_context": 1000000
+      },
+      "efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "max",
+      "thinking_config": {
+        "request_extensions": [
+          {
+            "formats": [
+              "chat"
+            ],
+            "param_location": "thinking",
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
+        ],
+        "effort_param_name": "reasoning_effort",
+        "effort_location": "top_level",
+        "omit_effort_when_disabled": true,
+        "default_enabled": true,
+        "response_field": "reasoning_content"
+      },
+      "_source": "https://cloud.baidu.com/doc/qianfan-api/s/wmwbl48n4",
+      "_comment": "千帆 Chat 默认开启思考，支持 low/high/max。关闭时只发送 thinking.type=disabled。"
+    },
+    {
+      "_comment": "======== 蚂蚁百灵 Ling ========"
+    },
+    {
+      "pattern": "ling-3[.]2-flash",
+      "name": "Ling 3.2 Flash",
+      "provider": "ant",
+      "capabilities": {
+        "thinking": true,
+        "thinking_always_on": false,
+        "vision": true,
+        "audio": false,
+        "function_calling": true,
+        "native_web_search": false,
+        "structured_output": true
+      },
+      "context": {
+        "max_input": 1000000,
+        "max_output": 32000,
+        "max_context": 1000000
+      },
+      "efforts": [],
+      "thinking_config": {
+        "request_extensions": [
+          {
+            "formats": [
+              "chat",
+              "messages"
+            ],
+            "param_location": "thinking",
+            "param": {
+              "type": "enabled"
+            },
+            "disable_param": {
+              "type": "disabled"
+            }
+          }
+        ],
+        "disallow_sampling_when_thinking": false,
+        "default_enabled": true,
+        "response_field": "reasoning_content"
+      },
+      "_source": "https://developer.ant-ling.com/zh-CN/docs/api-reference/chat/openai/",
+      "_comment": "按百灵直供接口配置，输出预算取 Messages 文档默认的 32000。Chat 原生搜索使用 enable_search，DDchat 暂用客户端搜索。"
     },
     {
       "pattern": "(?:antdigital/)?ling-3[.]1-flash",
@@ -6113,6 +6350,9 @@
       },
       "_source": "https://help.aliyun.com/en/model-studio/antdigital",
       "_comment": "2026-10-29 百炼北京区上架，使用已开通的 antdigital/Ling-3.1-flash 与对应工作空间 OpenAI 兼容地址。仅文本；默认思考，Chat 通过 enable_thinking 开关，无 reasoning_effort/thinking_budget。结构化输出仅 json_object，不支持 json_schema。preserve_thinking 仅 Chat 开启时发送。规格见 https://help.aliyun.com/en/model-studio/ling-3-1-flash-by-antdigital；其他协议仅沿用网关通用映射，未确认厂商直连支持。"
+    },
+    {
+      "_comment": "======== 兜底规则 ========"
     },
     {
       "pattern": ".*",
